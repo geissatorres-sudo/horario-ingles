@@ -272,9 +272,12 @@ const PROFESSORS = {
   "MARISOL":  {name:"Marisol Santiago",   email:"marisol.santiago1@upr.edu"},
   "CARLOS":   {name:"Carlos González",    email:"carlos.gonzalez28@upr.edu"},
   "GEISSA":   {name:"Geissa Torres",      email:"geissa.torres@upr.edu", admin:true},
-  "YANIRE":   {name:"Yaniré Díaz",        email:"yanire.diaz@upr.edu"}
+  "YANIRE":   {name:"Yaniré Díaz",        email:"yanire.diaz@upr.edu"},
+  "DESIREE":  {name:"Desirée Salaberríos", email:"desiree.salaberrio@upr.edu", admin:true, staff:true}
 };
 const PROF_KEYS = Object.keys(PROFESSORS);
+/* Teaching faculty only (excludes non-teaching admins/staff) used for rosters and overview. */
+const TEACH_KEYS = PROF_KEYS.filter(k=>!PROFESSORS[k].staff);
 
 /* Program / cohort labels (edit freely). Keys are the codes used in the Excel. */
 const PROGRAM_LABELS = {
@@ -363,7 +366,7 @@ function parseGrid(grid){
 
 /* ====================== UI ====================== */
 const $=id=>document.getElementById(id);
-$("rosterList").textContent=PROF_KEYS.map(k=>PROFESSORS[k].name).join(" · ");
+$("rosterList").textContent=TEACH_KEYS.map(k=>PROFESSORS[k].name).join(" · ");
 
 /* ---- local (per-browser) password storage with graceful fallback ---- */
 const mem={};
@@ -484,7 +487,7 @@ function renderAdmin(admin){
   let totC=0,totCr=0;
   let rows='';
   const sel=$("adminSelect"); sel.innerHTML='';
-  PROF_KEYS.forEach(k=>{
+  TEACH_KEYS.forEach(k=>{
     const prof=PROFESSORS[k];
     const mine=coursesFor(prof,k);
     const s=statsOf(mine);
@@ -495,7 +498,7 @@ function renderAdmin(admin){
     const opt=document.createElement("option"); opt.value=k; opt.textContent=prof.name; sel.appendChild(opt);
   });
   $("adminSummaryWrap").innerHTML='<table><thead><tr><th>Professor</th><th>Courses</th><th>Credits</th><th>Preps</th><th>In&nbsp;person</th><th>Online</th></tr></thead><tbody>'+rows+
-    '<tr class="tot-row"><td>Total ('+PROF_KEYS.length+' faculty)</td><td class="c-cr">'+totC+'</td><td class="c-cr">'+totCr+'</td><td class="c-cr">—</td><td class="c-cr">—</td><td class="c-cr">—</td></tr>'+
+    '<tr class="tot-row"><td>Total ('+TEACH_KEYS.length+' faculty)</td><td class="c-cr">'+totC+'</td><td class="c-cr">'+totCr+'</td><td class="c-cr">—</td><td class="c-cr">—</td><td class="c-cr">—</td></tr>'+
     '</tbody></table>';
   // clickable rows
   $("adminSummaryWrap").querySelectorAll("tr[data-key]").forEach(tr=>{
@@ -503,7 +506,7 @@ function renderAdmin(admin){
     tr.addEventListener("click",()=>{sel.value=tr.dataset.key; renderAdminDetail(tr.dataset.key);});
   });
   // selector
-  sel.value=admin._key||PROF_KEYS[0];
+  sel.value=admin._key||TEACH_KEYS[0];
   renderAdminDetail(sel.value);
   showView("adminView");
 }
