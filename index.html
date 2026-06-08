@@ -116,6 +116,9 @@ tbody tr:hover{background:var(--gold-soft)}
 .badge{display:inline-block;padding:3px 10px;border-radius:999px;font-size:.74rem;font-weight:600;white-space:nowrap}
 .badge.pres{background:var(--blue-bg);color:var(--blue)}
 .badge.dist{background:var(--green-bg);color:var(--green)}
+.badge.unex{background:#fbe7d2;color:#9a5a12;border:1px solid #e9c89a}
+.chip-unex{background:#9a5a12;color:#fff;border-color:#9a5a12}
+.chip-unex b{color:#fbe3c0}
 .prog-tag{display:inline-block;background:var(--plum-bg);color:var(--plum);padding:3px 9px;border-radius:7px;font-size:.78rem;font-weight:600}
 .day-cell{white-space:nowrap}
 .notes-cell{color:var(--muted);font-size:.85rem}
@@ -285,6 +288,14 @@ const PROGRAM_LABELS = {
   "COMU":"Communications", "CCOM":"CCOM", "GTEC":"GTEC", "ADEM":"ADEM"
 };
 
+/* Courses paid through UNEX (for record-keeping). Format: "COURSE SECTION". Edit freely. */
+const UNEX = new Set([
+  "INCO 3025 D40","INGL 3093 D56","INGL 3102 D41","INGL 3318 D55","INGL 3061 D40",
+  "INGL 3093 D55","INGL 3102 D40","INGL 3015 D55","INGL 3093 M25","INGL 3201 D57",
+  "INGL 3201 D56","INGL 3101 LE5","INCO 4008 D40"
+]);
+function isUnex(c){return UNEX.has(c.course+" "+c.section);}
+
 /* Credits per course: every course is 3 credits except the overrides below. */
 const CREDIT_DEFAULT = 3;
 const CREDIT_OVERRIDES = { "INCO 3025": 2 };
@@ -445,12 +456,13 @@ function timeStart(t){const m=(t||"").match(/(\d{1,2}):(\d{2})/);if(!m)return 99
 function coursesFor(prof,key){return COURSES.filter(c=>nameMatches(c.professor,prof.name)||(key&&norm(c.professor)===norm(key)));}
 function sortSched(list){return list.slice().sort((a,b)=>(DAY_ORDER[a.day]||9)-(DAY_ORDER[b.day]||9)||timeStart(a.time)-timeStart(b.time));}
 function statsOf(list){const pres=list.filter(c=>c.modality==="In person").length;
-  return{total:list.length,credits:list.reduce((s,c)=>s+courseCredits(c.course),0),preps:new Set(list.map(c=>c.course)).size,pres,dist:list.length-pres};}
+  return{total:list.length,credits:list.reduce((s,c)=>s+courseCredits(c.course),0),preps:new Set(list.map(c=>c.course)).size,pres,dist:list.length-pres,unex:list.filter(isUnex).length};}
 function chipsHTML(s){return '<span class="chip"><b>'+s.total+'</b>courses</span>'+
   '<span class="chip chip-key"><b>'+s.credits+'</b>total credits</span>'+
   '<span class="chip chip-key"><b>'+s.preps+'</b>preparations</span>'+
   '<span class="chip chip-print-hide"><b>'+s.pres+'</b>in person</span>'+
-  '<span class="chip chip-print-hide"><b>'+s.dist+'</b>online</span>';}
+  '<span class="chip chip-print-hide"><b>'+s.dist+'</b>online</span>'+
+  (s.unex>0?'<span class="chip chip-unex"><b>'+s.unex+'</b>UNEX</span>':'');}
 function tableHTML(list){
   if(list.length===0) return '<div class="empty-state"><div class="big">No courses found</div><div>There are no courses assigned to this professor in the loaded schedule.</div></div>';
   const dash='<span class="dash">—</span>';
@@ -464,9 +476,10 @@ function tableHTML(list){
       '<td class="day-cell">'+c.day+'</td>'+
       '<td class="time-cell">'+(c.time||dash)+'</td>'+
       '<td class="room-cell">'+(c.room||dash)+'</td>'+
-      '<td>'+badge+'</td></tr>';
+      '<td>'+badge+'</td>'+
+      '<td>'+(isUnex(c)?'<span class="badge unex">UNEX</span>':dash)+'</td></tr>';
   }
-  return '<div class="table-scroll"><table><thead><tr><th>Course</th><th>Cr.</th><th>Section</th><th>Day</th><th>Time</th><th>Room</th><th>Modality</th></tr></thead><tbody>'+rows+'</tbody></table></div>';
+  return '<div class="table-scroll"><table><thead><tr><th>Course</th><th>Cr.</th><th>Section</th><th>Day</th><th>Time</th><th>Room</th><th>Modality</th><th>UNEX</th></tr></thead><tbody>'+rows+'</tbody></table></div>';
 }
 function showView(id){["loginView","schedView","adminView"].forEach(v=>$(v).classList.toggle("hidden",v!==id));window.scrollTo({top:0,behavior:"smooth"});}
 
