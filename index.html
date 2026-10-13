@@ -17,24 +17,21 @@
   --green:#2f6f4f; --green-bg:#e3f0e8;
   --blue:#1f5d8c; --blue-bg:#e3edf5;
   --plum:#6b3f6e; --plum-bg:#efe3f0;
+  --amber:#9a5a12; --amber-bg:#fbe7d2;
   --shadow:0 18px 50px -28px rgba(10,35,66,.55);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
-body{
-  font-family:'Archivo',system-ui,sans-serif;color:var(--ink);
-  background:
-    radial-gradient(1100px 600px at 88% -8%, rgba(201,162,39,.14), transparent 60%),
-    radial-gradient(900px 700px at -5% 110%, rgba(28,58,99,.10), transparent 55%),
-    var(--paper);
-  min-height:100vh;-webkit-font-smoothing:antialiased;
-}
-.wrap{max-width:1080px;margin:0 auto;padding:0 22px 70px}
+body{font-family:'Archivo',system-ui,sans-serif;color:var(--ink);
+  background:radial-gradient(1100px 600px at 88% -8%, rgba(201,162,39,.14), transparent 60%),
+    radial-gradient(900px 700px at -5% 110%, rgba(28,58,99,.10), transparent 55%),var(--paper);
+  min-height:100vh;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px 70px}
 header.masthead{background:linear-gradient(160deg,var(--navy) 0%,var(--navy-2) 60%,var(--navy-soft) 100%);
   color:#fff;position:relative;overflow:hidden;border-bottom:4px solid var(--gold)}
 header.masthead::after{content:"";position:absolute;inset:0;
   background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.04) 0 1px,transparent 1px 46px);pointer-events:none}
-.masthead-inner{max-width:1080px;margin:0 auto;padding:30px 22px 28px;position:relative;z-index:1}
+.masthead-inner{max-width:1120px;margin:0 auto;padding:30px 22px 28px;position:relative;z-index:1}
 .crest{display:flex;align-items:center;gap:16px}
 .crest .seal{width:54px;height:54px;border-radius:50%;flex:none;
   background:radial-gradient(circle at 35% 30%,var(--gold-bright),var(--gold) 70%);
@@ -58,40 +55,27 @@ header.masthead::after{content:"";position:absolute;inset:0;
   display:grid;place-items:center;font-weight:700;font-size:.85rem;font-family:'Fraunces',serif}
 .step p{font-size:.93rem;color:var(--ink);line-height:1.45}
 .field-label{display:block;font-weight:600;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;color:var(--navy);margin-bottom:8px}
-.login-row{display:flex;gap:12px;flex-wrap:wrap}
-input[type=email],input[type=password]{flex:1;min-width:240px;width:100%;font-family:'Archivo',sans-serif;font-size:1.02rem;
-  padding:14px 16px;border:1.5px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);
+.login-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+input[type=email],input[type=password],input[type=text],input[type=number],select{font-family:'Archivo',sans-serif;font-size:1rem;
+  padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);
   transition:border-color .15s, box-shadow .15s}
-input[type=email]:focus,input[type=password]:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 4px rgba(201,162,39,.18)}
-.welcome{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:10px;padding:12px 15px;margin-bottom:16px;color:var(--navy);font-size:.95rem}
-.linklike{background:none;border:none;color:var(--blue);font-size:.86rem;padding:10px 0 0;text-decoration:underline;cursor:pointer}
-.linklike:hover{color:var(--navy)}
-.secnote{margin-top:10px;font-size:.76rem;color:var(--muted);line-height:1.5;font-style:italic}
-select{font-family:'Archivo',sans-serif;font-size:1rem;padding:12px 16px;border:1.5px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);min-width:260px;cursor:pointer}
-select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 4px rgba(201,162,39,.18)}
-.admin-pill{background:var(--green-bg);color:var(--green);border:1px solid #bfe0cd;padding:7px 14px;border-radius:999px;font-size:.8rem;font-weight:600;white-space:nowrap}
-.block-title{font-family:'Fraunces',serif;font-weight:600;font-size:1.15rem;color:var(--navy);margin:8px 0 12px}
-.mini-pill{display:inline-block;background:var(--green-bg);color:var(--green);font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:2px 7px;border-radius:6px;vertical-align:middle;margin-left:6px}
-.tot-row td{font-weight:700;color:var(--navy);border-top:2px solid var(--navy);background:var(--paper)!important}
-.detail-head{font-size:.95rem;color:var(--navy);margin:6px 0 12px}
-.detail-head strong{font-family:'Fraunces',serif}
-#adminDetail .chips{margin:0 0 16px}
+input[type=email],input[type=password]{flex:1;min-width:240px;width:100%;font-size:1.02rem;padding:14px 16px;border-radius:12px}
+input:focus,select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 4px rgba(201,162,39,.18)}
 button{font-family:'Archivo',sans-serif;font-weight:600;font-size:1rem;cursor:pointer;border:none;border-radius:12px;
   padding:14px 26px;transition:transform .12s, box-shadow .2s, background .2s}
 .btn-primary{background:var(--navy);color:#fff;box-shadow:0 10px 24px -12px rgba(10,35,66,.7)}
 .btn-primary:hover{background:var(--navy-2);transform:translateY(-2px)}
 .btn-ghost{background:transparent;color:var(--navy);border:1.5px solid var(--line);padding:11px 18px;font-size:.9rem}
 .btn-ghost:hover{border-color:var(--gold);background:var(--paper)}
+.btn-sm{padding:8px 14px;font-size:.85rem;border-radius:9px}
+.btn-danger{background:#f8e6e3;color:#9a2b2b;border:1.5px solid #e8c4bd}
+.btn-danger:hover{background:#f3d7d2}
+.welcome{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:10px;padding:12px 15px;margin-bottom:16px;color:var(--navy);font-size:.95rem}
+.linklike{background:none;border:none;color:var(--blue);font-size:.86rem;padding:10px 0 0;text-decoration:underline;cursor:pointer}
+.linklike:hover{color:var(--navy)}
+.secnote{margin-top:10px;font-size:.76rem;color:var(--muted);line-height:1.5;font-style:italic}
 .error{color:#9a2b2b;background:#f8e6e3;border:1px solid #e8c4bd;padding:11px 14px;border-radius:10px;margin-top:14px;font-size:.92rem;display:none}
 .error.show{display:block}
-.divider{display:flex;align-items:center;gap:14px;margin:26px 0 18px;color:var(--muted);font-size:.8rem;letter-spacing:.08em;text-transform:uppercase}
-.divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--line)}
-.upload-box{border:1.5px dashed var(--line);border-radius:12px;padding:16px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;background:var(--paper)}
-.upload-box .txt strong{display:block;color:var(--navy);font-size:.95rem}
-.upload-box .txt span{font-size:.82rem;color:var(--muted)}
-#fileInput{display:none}
-#uploadStatus{font-size:.82rem;margin-top:10px;color:var(--green);display:none}
-#uploadStatus.show{display:block}
 .roster{margin-top:18px;font-size:.82rem;color:var(--muted)}
 .roster b{color:var(--navy)}
 .sched-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;margin-bottom:6px}
@@ -103,10 +87,12 @@ button{font-family:'Archivo',sans-serif;font-weight:600;font-size:1rem;cursor:po
 .chip b{font-family:'Fraunces',serif;font-size:1.05rem;margin-right:5px}
 .chip-key{background:var(--navy);color:#fff;border-color:var(--navy)}
 .chip-key b{color:var(--gold-bright)}
+.chip-unex{background:var(--amber);color:#fff;border-color:var(--amber)}
+.chip-unex b{color:#fbe3c0}
 .table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:14px}
-table{width:100%;border-collapse:collapse;font-size:.94rem;min-width:560px}
-thead th{background:var(--navy);color:#fff;text-align:left;padding:14px 18px;font-weight:600;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
-tbody td{padding:14px 18px;border-top:1px solid var(--line);vertical-align:middle}
+table{width:100%;border-collapse:collapse;font-size:.92rem;min-width:620px}
+thead th{background:var(--navy);color:#fff;text-align:left;padding:13px 16px;font-weight:600;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+tbody td{padding:13px 16px;border-top:1px solid var(--line);vertical-align:middle}
 tbody tr:nth-child(even){background:#faf8f1}
 tbody tr:hover{background:var(--gold-soft)}
 .time-cell,.room-cell{white-space:nowrap;font-variant-numeric:tabular-nums;letter-spacing:.01em}
@@ -116,21 +102,68 @@ tbody tr:hover{background:var(--gold-soft)}
 .badge{display:inline-block;padding:3px 10px;border-radius:999px;font-size:.74rem;font-weight:600;white-space:nowrap}
 .badge.pres{background:var(--blue-bg);color:var(--blue)}
 .badge.dist{background:var(--green-bg);color:var(--green)}
-.badge.unex{background:#fbe7d2;color:#9a5a12;border:1px solid #e9c89a}
-.chip-unex{background:#9a5a12;color:#fff;border-color:#9a5a12}
-.chip-unex b{color:#fbe3c0}
-.prog-tag{display:inline-block;background:var(--plum-bg);color:var(--plum);padding:3px 9px;border-radius:7px;font-size:.78rem;font-weight:600}
-.day-cell{white-space:nowrap}
-.notes-cell{color:var(--muted);font-size:.85rem}
+.badge.hyb{background:var(--plum-bg);color:var(--plum)}
+.badge.unex{background:var(--amber-bg);color:var(--amber);border:1px solid #e9c89a}
 .dash{color:var(--line)}
+.prog-tag{display:inline-block;background:var(--plum-bg);color:var(--plum);padding:3px 9px;border-radius:7px;font-size:.78rem;font-weight:600}
 .foot-actions{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap}
 .empty-state{text-align:center;padding:30px 10px;color:var(--muted)}
 .empty-state .big{font-family:'Fraunces',serif;font-size:1.3rem;color:var(--navy);margin-bottom:6px}
-.appfoot{text-align:center;color:var(--muted);font-size:.78rem;margin-top:34px;line-height:1.6}
-.appfoot b{color:var(--navy)}
+.admin-pill{background:var(--green-bg);color:var(--green);border:1px solid #bfe0cd;padding:7px 14px;border-radius:999px;font-size:.8rem;font-weight:600;white-space:nowrap}
+.block-title{font-family:'Fraunces',serif;font-weight:600;font-size:1.15rem;color:var(--navy);margin:8px 0 12px}
+.mini-pill{display:inline-block;background:var(--green-bg);color:var(--green);font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:2px 7px;border-radius:6px;vertical-align:middle;margin-left:6px}
+.tot-row td{font-weight:700;color:var(--navy);border-top:2px solid var(--navy);background:var(--paper)!important}
+.detail-head{font-size:.95rem;color:var(--navy);margin:6px 0 12px}
+.detail-head strong{font-family:'Fraunces',serif}
+#adminDetail .chips{margin:0 0 16px}
+.divider{display:flex;align-items:center;gap:14px;margin:28px 0 18px;color:var(--muted);font-size:.8rem;letter-spacing:.08em;text-transform:uppercase}
+.divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--line)}
+.upload-box{border:1.5px dashed var(--line);border-radius:12px;padding:16px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;background:var(--paper)}
+.upload-box .txt strong{display:block;color:var(--navy);font-size:.95rem}
+.upload-box .txt span{font-size:.82rem;color:var(--muted)}
+#fileInput{display:none}
+#uploadStatus{font-size:.82rem;margin-top:10px;display:none}
+#uploadStatus.show{display:block}
+/* tabs */
+.tabbar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:0}
+.tabbtn{background:var(--paper);border:1.5px solid var(--line);border-bottom:none;border-radius:12px 12px 0 0;
+  padding:12px 20px;font-weight:600;font-size:.9rem;color:var(--muted);cursor:pointer}
+.tabbtn.active{background:#fff;color:var(--navy);border-color:var(--line)}
+.tabpane{border:1.5px solid var(--line);border-radius:0 14px 14px 14px;padding:22px;background:#fff}
+/* editor */
+.ed-table{width:100%;border-collapse:collapse;font-size:.84rem;min-width:1000px}
+.ed-table th{background:var(--navy);color:#fff;padding:9px 8px;font-size:.66rem;text-transform:uppercase;letter-spacing:.04em;text-align:left;white-space:nowrap;position:sticky;top:0}
+.ed-table td{padding:5px 6px;border-top:1px solid var(--line)}
+.ed-table input[type=text],.ed-table input[type=number],.ed-table select{padding:7px 8px;font-size:.82rem;border-radius:7px;width:100%;min-width:60px}
+.ed-table input.w-course{min-width:92px}
+.ed-table input.w-sec{min-width:62px}
+.ed-table input.w-time{min-width:98px}
+.ed-table input.w-room{min-width:88px}
+.ed-table .cr-in{width:52px;min-width:52px;text-align:center}
+.ed-table .ux{width:20px;height:20px;cursor:pointer}
+.ed-del{background:#f8e6e3;color:#9a2b2b;border:none;border-radius:7px;padding:7px 10px;cursor:pointer;font-weight:700}
+.ed-del:hover{background:#f0cfc9}
+.ed-toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.ed-note{background:var(--amber-bg);border:1px solid #e9c89a;color:var(--amber);border-radius:10px;padding:12px 15px;font-size:.86rem;margin-bottom:16px;line-height:1.5}
+.save-status{font-size:.85rem;font-weight:600;color:var(--green)}
+/* plantilla */
+.pl-doc{font-size:.82rem}
+.pl-header{text-align:center;margin-bottom:4px}
+.pl-header .u1{font-family:'Fraunces',serif;font-weight:600;color:var(--navy);font-size:1.05rem}
+.pl-header .u2{color:var(--muted);font-size:.85rem}
+.pl-header .u3{font-weight:700;color:var(--navy);margin-top:8px;font-size:1rem}
+.pl-header .u4{color:var(--ink);font-size:.9rem}
+.pl-meta{margin:12px 0;font-size:.88rem}
+.pl-table{width:100%;border-collapse:collapse;font-size:.76rem;min-width:1100px}
+.pl-table th{background:var(--navy);color:#fff;padding:7px 6px;font-size:.6rem;text-transform:uppercase;letter-spacing:.03em;border:1px solid #2b456b;text-align:center;line-height:1.25}
+.pl-table td{padding:6px 7px;border:1px solid var(--line);vertical-align:top}
+.pl-table tbody tr:nth-child(even){background:#faf8f1}
+.pl-table .num{text-align:center;color:var(--muted)}
+.pl-table .ctr{text-align:center}
 .hidden{display:none!important}
-@media (max-width:560px){.card{padding:22px}.crest .titles h1{font-size:1.25rem}.sched-head .who h2{font-size:1.5rem}}
-@media print{header.masthead,.foot-actions,.appfoot,.chip-print-hide{display:none}body{background:#fff}.card{box-shadow:none;border:none;margin-top:10px}}
+@media (max-width:560px){.card{padding:20px}.crest .titles h1{font-size:1.25rem}.sched-head .who h2{font-size:1.5rem}}
+@media print{header.masthead,.foot-actions,.chip-print-hide,.tabbar,.ed-toolbar,.upload-box,.divider{display:none}
+  body{background:#fff}.card{box-shadow:none;border:none;margin-top:10px}.tabpane{border:none;padding:0}}
 </style>
 </head>
 <body>
@@ -144,7 +177,7 @@ tbody tr:hover{background:var(--gold-soft)}
         <h1>Faculty Course Schedule</h1>
       </div>
     </div>
-    <div class="term-tag"><span class="dot"></span><span>English Department &nbsp;·&nbsp; <span id="termLabel">First Semester 2026-2027 · C61</span></span></div>
+    <div class="term-tag"><span class="dot"></span><span>English Department &nbsp;·&nbsp; <span id="termLabel"></span></span></div>
   </div>
 </header>
 
@@ -154,14 +187,11 @@ tbody tr:hover{background:var(--gold-soft)}
   <section id="loginView" class="card intro">
     <h2>Look up your teaching schedule</h2>
     <p class="lead">This tool shows the courses you will be teaching this term: the section, day, time, and room for each one. The first time you sign in, you create a password to protect your schedule.</p>
-
     <div class="steps">
       <div class="step"><div class="n">1</div><p>Type your <b>institutional email</b> (<code>@upr.edu</code>) and click Continue.</p></div>
       <div class="step"><div class="n">2</div><p><b>First time:</b> create a password. <b>Returning:</b> enter your password.</p></div>
       <div class="step"><div class="n">3</div><p>Your schedule appears with <b>course, credits, section, day, time, room</b> and modality.</p></div>
     </div>
-
-    <!-- Step 1: email -->
     <div id="authEmail">
       <label class="field-label" for="emailInput">Institutional email</label>
       <div class="login-row">
@@ -169,8 +199,6 @@ tbody tr:hover{background:var(--gold-soft)}
         <button class="btn-primary" id="continueBtn">Continue</button>
       </div>
     </div>
-
-    <!-- Step 2a: create password (first time) -->
     <div id="authCreate" class="hidden">
       <p class="welcome" id="createWelcome"></p>
       <label class="field-label" for="newPw">Create a password</label>
@@ -182,8 +210,6 @@ tbody tr:hover{background:var(--gold-soft)}
         <button class="btn-ghost" id="createBack">← Back</button>
       </div>
     </div>
-
-    <!-- Step 2b: enter password (returning) -->
     <div id="authSignin" class="hidden">
       <p class="welcome" id="signinWelcome"></p>
       <label class="field-label" for="pwInput">Password</label>
@@ -194,7 +220,6 @@ tbody tr:hover{background:var(--gold-soft)}
       </div>
       <button class="linklike" id="forgotBtn">Forgot your password? Reset it</button>
     </div>
-
     <div class="error" id="loginError"></div>
     <p class="roster">Faculty with access configured: <b id="rosterList"></b></p>
     <p class="secnote">Passwords are stored, encrypted, only in this browser as a convenience lock — they do not sync across devices and are not a substitute for institutional authentication.</p>
@@ -203,11 +228,7 @@ tbody tr:hover{background:var(--gold-soft)}
   <!-- ============ INDIVIDUAL SCHEDULE ============ -->
   <section id="schedView" class="card hidden">
     <div class="sched-head">
-      <div class="who">
-        <small>Teaching schedule</small>
-        <h2 id="profName"></h2>
-        <div class="email" id="profEmail"></div>
-      </div>
+      <div class="who"><small>Teaching schedule</small><h2 id="profName"></h2><div class="email" id="profEmail"></div></div>
       <div class="chips" id="profChips"></div>
     </div>
     <div id="profSchedBody"></div>
@@ -217,46 +238,77 @@ tbody tr:hover{background:var(--gold-soft)}
     </div>
   </section>
 
-  <!-- ============ ADMIN DASHBOARD ============ -->
+  <!-- ============ ADMIN ============ -->
   <section id="adminView" class="card hidden">
     <div class="sched-head">
-      <div class="who">
-        <small>Administrator</small>
-        <h2 id="adminName"></h2>
-        <div class="email" id="adminEmail"></div>
-      </div>
+      <div class="who"><small>Administrator</small><h2 id="adminName"></h2><div class="email" id="adminEmail"></div></div>
       <span class="admin-pill">Full access · all faculty</span>
     </div>
 
-    <h3 class="block-title">Faculty overview</h3>
-    <div class="table-scroll" id="adminSummaryWrap"></div>
-
-    <h3 class="block-title" style="margin-top:26px">View a professor's schedule</h3>
-    <div class="login-row" style="margin-bottom:6px">
-      <select id="adminSelect"></select>
+    <div class="tabbar" id="adminTabs">
+      <button class="tabbtn active" data-tab="tab-overview">Overview</button>
+      <button class="tabbtn" data-tab="tab-editor">✏️ Edit courses</button>
+      <button class="tabbtn" data-tab="tab-plantilla">Plantilla Propuesta Programa</button>
     </div>
-    <div id="adminDetail"></div>
 
-    <div class="divider">Load a different term schedule</div>
-    <div class="upload-box">
-      <div class="txt">
-        <strong>Upload Excel (Academic Program tab)</strong>
-        <span>Replaces the current data for this session without reloading the page.</span>
+    <!-- OVERVIEW -->
+    <div class="tabpane" id="tab-overview">
+      <h3 class="block-title">Faculty overview</h3>
+      <div class="table-scroll" id="adminSummaryWrap"></div>
+      <h3 class="block-title" style="margin-top:26px">View a professor's schedule</h3>
+      <div class="login-row" style="margin-bottom:12px"><select id="adminSelect"></select></div>
+      <div id="adminDetail"></div>
+      <div class="divider">Load a different term schedule</div>
+      <div class="upload-box">
+        <div class="txt"><strong>Upload Excel (Academic Program tab)</strong>
+          <span>Replaces the current data for this session without reloading the page.</span></div>
+        <div><button class="btn-ghost" id="uploadBtn">Choose .xlsx file</button>
+          <input type="file" id="fileInput" accept=".xlsx,.xls"></div>
       </div>
-      <div>
-        <button class="btn-ghost" id="uploadBtn">Choose .xlsx file</button>
-        <input type="file" id="fileInput" accept=".xlsx,.xls">
+      <div id="uploadStatus"></div>
+    </div>
+
+    <!-- EDITOR -->
+    <div class="tabpane hidden" id="tab-editor">
+      <div class="ed-note">
+        <b>Make changes here, then publish.</b> Edit any cell below — course, section, professor, day, time, room, credits, modality, or UNEX.
+        Changes apply to this browser immediately. To make them permanent for everyone, click
+        <b>Download updated index.html</b> and upload that file to your GitHub repository (replacing the current one).
+      </div>
+      <div style="margin-bottom:16px">
+        <label class="field-label" for="termInput">Term label (shown in the header)</label>
+        <input type="text" id="termInput" style="max-width:420px">
+      </div>
+      <div class="ed-toolbar">
+        <button class="btn-primary btn-sm" id="edAdd">+ Add course</button>
+        <button class="btn-primary btn-sm" id="edSave">Save changes (this browser)</button>
+        <button class="btn-ghost btn-sm" id="edDownloadHtml">⬇ Download updated index.html</button>
+        <button class="btn-ghost btn-sm" id="edRevert">Revert to published</button>
+        <span class="save-status" id="edStatus"></span>
+      </div>
+      <div class="table-scroll" style="max-height:60vh;overflow-y:auto">
+        <table class="ed-table"><thead><tr>
+          <th>Course</th><th>Cr.</th><th>Section</th><th>Professor</th><th>Day</th><th>Time</th><th>Room</th><th>Modality</th><th>Program</th><th>Cupo</th><th>UNEX</th><th></th>
+        </tr></thead><tbody id="edBody"></tbody></table>
       </div>
     </div>
-    <div id="uploadStatus"></div>
+
+    <!-- PLANTILLA -->
+    <div class="tabpane hidden" id="tab-plantilla">
+      <div class="ed-toolbar">
+        <button class="btn-primary btn-sm" id="plDownload">⬇ Download Excel (.xlsx)</button>
+        <button class="btn-ghost btn-sm" id="plPrint">Print / Save PDF</button>
+        <span class="secnote" style="margin:0">Official proposal layout · Propuesta de Programación Académica</span>
+      </div>
+      <div class="pl-doc" id="plBody"></div>
+    </div>
 
     <div class="foot-actions">
       <button class="btn-ghost" id="adminBack">← Sign out</button>
-      <button class="btn-primary" id="adminPrint">Print / Save PDF</button>
     </div>
   </section>
 
-  <p class="appfoot">
+  <p class="roster" style="text-align:center;margin-top:34px;line-height:1.6">
     English Department · Office of Academic Affairs, UPRA<br>
     Data is taken from the <b>Academic Program</b> tab of the term schedule.
   </p>
@@ -264,84 +316,91 @@ tbody tr:hover{background:var(--gold-soft)}
 
 <script>
 /* ====================== CONFIG: FACULTY ======================
-   To add a professor: add their name as it appears in the Excel (UPPERCASE)
-   and their email. Matching is case- and accent-insensitive. */
+   Add a professor: UPPERCASE key (as it appears in the Excel), name, email.
+   aliases = other surnames/spellings used in the Excel. admin:true = sees dashboard.
+   staff:true = admin who does NOT teach (excluded from the faculty roster/overview). */
 const PROFESSORS = {
-  "MONIQUE":  {name:"Monique Guidicelli", email:"monique.guidicelli@upr.edu"},
-  "KEVIN":    {name:"Kevin Kelly",        email:"kevin.kelly@upr.edu"},
-  "LIZETTE":  {name:"Lizette Rosa",       email:"lizette.rosa@upr.edu"},
-  "JESUS":    {name:"Jesús Ramírez",      email:"jesus.ramirez1@upr.edu"},
-  "MATEO":    {name:"Mateo Garcés",       email:"mateo.garces@upr.edu"},
-  "MARISOL":  {name:"Marisol Santiago",   email:"marisol.santiago1@upr.edu"},
-  "CARLOS":   {name:"Carlos González",    email:"carlos.gonzalez28@upr.edu"},
-  "GEISSA":   {name:"Geissa Torres",      email:"geissa.torres@upr.edu", admin:true},
-  "YANIRE":   {name:"Yaniré Díaz",        email:"yanire.diaz@upr.edu"},
-  "DESIREE":  {name:"Desirée Salaberríos", email:"desiree.salaberrio@upr.edu", admin:true, staff:true}
+  "MONIQUE":  {name:"Monique Guidicelli", email:"monique.guidicelli@upr.edu", aliases:[]},
+  "KEVIN":    {name:"Kevin Kelly",        email:"kevin.kelly@upr.edu", aliases:[]},
+  "LIZETTE":  {name:"Lizette Rosa",       email:"lizette.rosa@upr.edu", aliases:[]},
+  "JESUS":    {name:"Jesús Ramírez",      email:"jesus.ramirez1@upr.edu", aliases:["RAMIREZ","RAMIRE"]},
+  "MATEO":    {name:"Mateo Garcés",       email:"mateo.garces@upr.edu", aliases:["GARCES"]},
+  "MARISOL":  {name:"Marisol Santiago",   email:"marisol.santiago1@upr.edu", aliases:[]},
+  "CARLOS":   {name:"Carlos González",    email:"carlos.gonzalez28@upr.edu", aliases:["GONZALEZ"]},
+  "GEISSA":   {name:"Geissa Torres",      email:"geissa.torres@upr.edu", aliases:[], admin:true},
+  "YANIRE":   {name:"Yaniré Díaz",        email:"yanire.diaz@upr.edu", aliases:[]},
+  "DESIREE":  {name:"Desirée Salaberríos",email:"desiree.salaberrio@upr.edu", aliases:[], admin:true, staff:true}
 };
 const PROF_KEYS = Object.keys(PROFESSORS);
-/* Teaching faculty only (excludes non-teaching admins/staff) used for rosters and overview. */
 const TEACH_KEYS = PROF_KEYS.filter(k=>!PROFESSORS[k].staff);
 
-/* Program / cohort labels (edit freely). Keys are the codes used in the Excel. */
+/* Program / cohort codes -> display labels (edit freely). */
 const PROGRAM_LABELS = {
-  "ENFERMERIA":"Nursing", "BIOLOGIA":"Biology", "EDUCACION":"Education",
-  "COMU":"Communications", "CCOM":"CCOM", "GTEC":"GTEC", "ADEM":"ADEM"
+  "ENFERMERIA":"Nursing","BIOLOGIA":"Biology","EDUCACION":"Education",
+  "COMU":"Communications","CCOM":"CCOM","GTEC":"GTEC","ADEM":"ADEM"
 };
 
-/* Courses paid through UNEX (for record-keeping). Format: "COURSE SECTION". Edit freely. */
-const UNEX = new Set([
-  "INCO 3025 D40","INGL 3093 D56","INGL 3102 D41","INGL 3318 D55","INGL 3061 D40",
-  "INGL 3093 D55","INGL 3102 D40","INGL 3015 D55","INGL 3201 D57",
-  "INCO 4008 D40"
-]);
-function isUnex(c){return UNEX.has(c.course+" "+c.section);}
+/*DATA_START*/
+let TERM = "Second Semester 2026-2027 · C62 (Jan–May 2027)";
+let COURSES = [{"course":"INGL 3094","section":"LD0","professor":"Marisol Santiago","day":"Monday & Wednesday","time":"10:00-11:30","room":"AC-201","modality":"In person","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3093","section":"LE5","professor":"Marisol Santiago","day":"Monday & Wednesday","time":"11:30-12:50","room":"AC-201","modality":"In person","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3093","section":"L10","professor":"Marisol Santiago","day":"Monday & Wednesday","time":"1:00-2:20","room":"AC-201","modality":"In person","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3202","section":"D56","professor":"Jesús Ramírez","day":"Monday & Wednesday","time":"5:30-6:50","room":"Online","modality":"Online","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3102","section":"QD0","professor":"Lizette Rosa","day":"Monday & Wednesday","time":"10:00-11:30","room":"AC-202","modality":"In person","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3101","section":"LE5","professor":"Lizette Rosa","day":"Monday & Wednesday","time":"11:30-12:50","room":"AC-202","modality":"In person","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3102","section":"Q11","professor":"Lizette Rosa","day":"Monday & Wednesday","time":"1:00-2:20","room":"AC-202","modality":"In person","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3102","section":"LB5","professor":"Carlos González","day":"Monday & Wednesday","time":"8:30-9:50","room":"AC-203","modality":"In person","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3102","section":"LD0","professor":"Carlos González","day":"Monday & Wednesday","time":"10:00-11:30","room":"AC-203","modality":"In person","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3102","section":"LE5","professor":"Carlos González","day":"Monday & Wednesday","time":"11:30-12:50","room":"AC-203","modality":"In person","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3104","section":"H10","professor":"Kevin Kelly","day":"Monday & Wednesday","time":"1:00-2:20","room":"AC-203","modality":"Hybrid","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3102","section":"L25","professor":"Carlos González","day":"Monday & Wednesday","time":"2:30-3:50","room":"AC-203","modality":"In person","program":"Education","seats":"13","notes":"","credits":3},{"course":"INCO 4008","section":"D55","professor":"Carlos González","day":"Monday & Wednesday","time":"5:30-6:50","room":"Online","modality":"Online","program":"","seats":"","notes":"","credits":2},{"course":"INGL 3104","section":"LB5","professor":"Monique Guidicelli","day":"Monday & Wednesday","time":"8:30-9:50","room":"AC-204","modality":"In person","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3102","section":"QE5","professor":"Monique Guidicelli","day":"Monday & Wednesday","time":"11:30-12:50","room":"AC-204","modality":"In person","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3021","section":"","professor":"Monique Guidicelli","day":"Monday & Wednesday","time":"1:00-2:20","room":"AC-204","modality":"In person","program":"Education","seats":"","notes":"","credits":3},{"course":"INGL 3102","section":"Q25","professor":"Monique Guidicelli","day":"Monday & Wednesday","time":"2:30-3:50","room":"AC-204","modality":"In person","program":"Education","seats":"27","notes":"","credits":3},{"course":"INGL 3318","section":"D40","professor":"Kevin Kelly","day":"Monday & Wednesday","time":"4:00-5:20","room":"Online","modality":"Online","program":"","seats":"10","notes":"","credits":3},{"course":"INGL 3202","section":"D55","professor":"Kevin Kelly","day":"Monday & Wednesday","time":"5:30-6:50","room":"Online","modality":"Online","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3102","section":"D11","professor":"Yaniré Díaz","day":"Monday & Wednesday","time":"1:00-2:20","room":"Online","modality":"Online","program":"GTEC","seats":"15","notes":"","credits":3},{"course":"INGL 3012","section":"D25","professor":"Yaniré Díaz","day":"Monday & Wednesday","time":"2:30-3:50","room":"Online","modality":"Online","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3101","section":"D40","professor":"Yaniré Díaz","day":"Monday & Wednesday","time":"4:00-5:20","room":"Online","modality":"Online","program":"Nursing","seats":"","notes":"","credits":3},{"course":"INGL 3015","section":"DC0","professor":"Geissa Torres","day":"Friday","time":"9:00-11:50","room":"Online","modality":"Online","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3015","section":"D10","professor":"Geissa Torres","day":"Friday","time":"1:00-3:50","room":"Online","modality":"Online","program":"","seats":"","notes":"","credits":3},{"course":"INCO 4006","section":"DD0","professor":"Jesús Ramírez","day":"Monday & Wednesday","time":"10:00-11:30","room":"Online","modality":"Online","program":"","seats":"","notes":"","credits":2},{"course":"INGL 3102","section":"D10","professor":"Mateo Garcés","day":"Monday & Wednesday","time":"1:00-2:20","room":"Online","modality":"Online","program":"","seats":"","notes":"","credits":3},{"course":"INCO 4006","section":"D25","professor":"Mateo Garcés","day":"Monday & Wednesday","time":"2:30-3:50","room":"Online","modality":"Online","program":"","seats":"","notes":"","credits":2},{"course":"INGL 3015","section":"D55","professor":"Mateo Garcés","day":"Monday & Wednesday","time":"5:30-6:50","room":"Online","modality":"Online","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3093","section":"ME5","professor":"Marisol Santiago","day":"Tuesday & Thursday","time":"11:30-12:50","room":"AC-201","modality":"In person","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3093","section":"M10","professor":"Marisol Santiago","day":"Tuesday & Thursday","time":"1:00-2:20","room":"AC-201","modality":"In person","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3094","section":"M25","professor":"Marisol Santiago","day":"Tuesday & Thursday","time":"2:30-3:50","room":"AC-201","modality":"In person","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3104","section":"MB5","professor":"Kevin Kelly","day":"Tuesday & Thursday","time":"8:30-9:50","room":"AC-202","modality":"In person","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3104","section":"ME5","professor":"Kevin Kelly","day":"Tuesday & Thursday","time":"11:30-12:50","room":"AC-202","modality":"In person","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3005","section":"D10","professor":"Mateo Garcés","day":"Tuesday & Thursday","time":"1:00-2:20","room":"Online","modality":"Online","program":"GTEC","seats":"","notes":"","credits":3},{"course":"INGL 3102","section":"D40","professor":"Mateo Garcés","day":"Tuesday & Thursday","time":"4:00-5:20","room":"Online","modality":"Online","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3015","section":"D56","professor":"Mateo Garcés","day":"Tuesday & Thursday","time":"5:30-6:50","room":"Online","modality":"Online","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3102","section":"QB5","professor":"Lizette Rosa","day":"Tuesday & Thursday","time":"8:30-9:50","room":"AC-203","modality":"In person","program":"Nursing","seats":"","notes":"","credits":3},{"course":"INGL 3102","section":"QE6","professor":"Lizette Rosa","day":"Tuesday & Thursday","time":"11:30-12:50","room":"AC-203","modality":"In person","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3102","section":"Q10","professor":"Lizette Rosa","day":"Tuesday & Thursday","time":"1:00-2:20","room":"AC-203","modality":"In person","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3102","section":"HB5","professor":"Yaniré Díaz","day":"Tuesday & Thursday","time":"8:30-9:50","room":"AC-204","modality":"Hybrid","program":"Nursing","seats":"","notes":"","credits":3},{"course":"INGL 3102","section":"HE5","professor":"Yaniré Díaz","day":"Tuesday & Thursday","time":"11:30-12:50","room":"AC-204","modality":"Hybrid","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3102","section":"M10","professor":"Monique Guidicelli","day":"Tuesday & Thursday","time":"1:00-2:20","room":"AC-204","modality":"In person","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3102","section":"Q26","professor":"Monique Guidicelli","day":"Tuesday & Thursday","time":"2:30-3:50","room":"AC-204","modality":"In person","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3061","section":"H40","professor":"Monique Guidicelli","day":"Tuesday & Thursday","time":"4:00-5:20","room":"AC-204","modality":"Hybrid","program":"","seats":"","notes":"","credits":3},{"course":"EDPE 3018","section":"H25","professor":"Yaniré Díaz","day":"Tuesday & Thursday","time":"2:30-3:50","room":"AC-306 (Cap: 22)","modality":"Hybrid","program":"Education","seats":"","notes":"","credits":3},{"course":"INCO 4006","section":"D40","professor":"Jesús Ramírez","day":"Tuesday & Thursday","time":"4:00-5:20","room":"Online","modality":"Online","program":"","seats":"","notes":"","credits":2},{"course":"INCO 4006","section":"DB5","professor":"Jesús Ramírez","day":"Tuesday & Thursday","time":"8:30-9:50","room":"Online","modality":"Online","program":"","seats":"","notes":"","credits":2},{"course":"INGL 3222","section":"D40","professor":"Kevin Kelly","day":"Tuesday & Thursday","time":"4:00-5:20","room":"Online","modality":"Online","program":"","seats":"","notes":"","credits":3}];
+let UNEX_INIT = [];
+/*DATA_END*/
 
-/* Credits per course: every course is 3 credits except the overrides below. */
-const CREDIT_DEFAULT = 3;
-const CREDIT_OVERRIDES = { "INCO 3025": 2 };
-function courseCredits(course){
-  return (course in CREDIT_OVERRIDES) ? CREDIT_OVERRIDES[course] : CREDIT_DEFAULT;
-}
+/* ====================== PERSISTENCE (per browser) ====================== */
+const mem={};
+const store={
+  get(k){try{return localStorage.getItem(k);}catch(e){return (k in mem)?mem[k]:null;}},
+  set(k,v){try{localStorage.setItem(k,v);}catch(e){mem[k]=v;}},
+  remove(k){try{localStorage.removeItem(k);}catch(e){delete mem[k];}}
+};
+const DATA_KEY="fsched_data_C62";
+let UNEX=new Set(UNEX_INIT);
+function unexKey(c){return c.course+" "+c.section;}
+function isUnex(c){return c.unex===true || UNEX.has(unexKey(c));}
+/* load saved edits if present */
+(function loadSaved(){
+  const raw=store.get(DATA_KEY);
+  if(raw){try{const o=JSON.parse(raw);
+    if(o.courses&&o.courses.length){COURSES=o.courses;}
+    if(o.term){TERM=o.term;}
+  }catch(e){}}
+})();
+function persist(){store.set(DATA_KEY,JSON.stringify({courses:COURSES,term:TERM}));}
 
-function norm(s){return (s||"").toString().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").trim();}
-function profKeyFromEmail(email){const e=norm(email);for(const k of PROF_KEYS){if(norm(PROFESSORS[k].email)===e)return k;}return null;}
-/* tolerant name match: exact, or schedule name is a prefix/first-name of full name */
-function nameMatches(scheduleName, fullName){
-  const a=norm(scheduleName), b=norm(fullName);
-  if(!a) return false;
-  if(a===b) return true;
-  return b.split(" ")[0]===a.split(" ")[0] && (b.startsWith(a)||a.startsWith(b));
-}
-
-/* ====================== EMBEDDED DATA (TERM C61) ====================== */
-let COURSES = [{"course":"INGL 3093","section":"LD0","professor":"Marisol Santiago","day":"Monday & Wednesday","time":"10:00-11:30","room":"AC-201","modality":"In person","program":"","notes":""},{"course":"INGL 3093","section":"LE5","professor":"Marisol Santiago","day":"Monday & Wednesday","time":"11:30-12:50","room":"AC-201","modality":"In person","program":"Education","notes":""},{"course":"INGL 3093","section":"L10","professor":"Marisol Santiago","day":"Monday & Wednesday","time":"1:00-2:20","room":"AC-201","modality":"In person","program":"","notes":""},{"course":"INGL 3093","section":"D55","professor":"Monique Guidicelli","day":"Monday & Wednesday","time":"5:30-6:50","room":"Online","modality":"Online","program":"Nursing","notes":""},{"course":"INGL 3103","section":"LB5","professor":"Monique Guidicelli","day":"Monday & Wednesday","time":"8:30-9:50","room":"AC-202","modality":"In person","program":"","notes":""},{"course":"INGL 3101","section":"QD0","professor":"Monique Guidicelli","day":"Monday & Wednesday","time":"10:00-11:30","room":"AC-202","modality":"In person","program":"","notes":""},{"course":"INGL 3101","section":"LE5","professor":"Monique Guidicelli","day":"Monday & Wednesday","time":"11:30-12:50","room":"AC-202","modality":"In person","program":"CCOM","notes":"10 reserved seats"},{"course":"INGL 3101","section":"L25","professor":"Lizette Rosa","day":"Monday & Wednesday","time":"2:30-3:50","room":"AC-202","modality":"In person","program":"Education","notes":""},{"course":"INGL 3318","section":"D55","professor":"Kevin Kelly","day":"Monday & Wednesday","time":"5:30-6:50","room":"Online","modality":"Online","program":"","notes":""},{"course":"INGL 3101","section":"LB5","professor":"Carlos González","day":"Monday & Wednesday","time":"8:30-9:50","room":"AC-203","modality":"In person","program":"ADEM","notes":""},{"course":"INGL 3101","section":"LD1","professor":"Carlos González","day":"Monday & Wednesday","time":"10:00-11:30","room":"AC-203","modality":"In person","program":"ADEM","notes":""},{"course":"INGL 3101","section":"Q10","professor":"Carlos González","day":"Monday & Wednesday","time":"1:00-2:20","room":"AC-203","modality":"In person","program":"CCOM","notes":"10 reserved seats"},{"course":"INGL 3101","section":"Q25","professor":"Carlos González","day":"Monday & Wednesday","time":"2:30-3:50","room":"AC-203","modality":"In person","program":"Education","notes":""},{"course":"INCO 4008","section":"D40","professor":"Carlos González","day":"Monday & Wednesday","time":"4:00-5:20","room":"Online","modality":"Online","program":"","notes":""},{"course":"INGL 3101","section":"QB5","professor":"Lizette Rosa","day":"Monday & Wednesday","time":"8:30-9:50","room":"AC-204","modality":"In person","program":"ADEM","notes":""},{"course":"INGL 3101","section":"LD0","professor":"Yaniré Díaz","day":"Monday & Wednesday","time":"10:00-11:30","room":"AC-204","modality":"In person","program":"Biology","notes":""},{"course":"INGL 3101","section":"QE6","professor":"Lizette Rosa","day":"Monday & Wednesday","time":"11:30-12:50","room":"AC-204","modality":"In person","program":"","notes":""},{"course":"INGL 3101","section":"L11","professor":"Yaniré Díaz","day":"Monday & Wednesday","time":"1:00-2:20","room":"AC-204","modality":"In person","program":"Biology","notes":""},{"course":"INGL 3011","section":"L25","professor":"Yaniré Díaz","day":"Monday & Wednesday","time":"2:30-3:50","room":"AC-204","modality":"In person","program":"","notes":""},{"course":"INCO 3025","section":"D40","professor":"Lizette Rosa","day":"Monday (only)","time":"4:00-5:20","room":"Online","modality":"Online","program":"GTEC","notes":""},{"course":"INGL 3015","section":"D55","professor":"Mateo Garcés","day":"Monday & Wednesday","time":"5:30-6:50","room":"Online","modality":"Online","program":"","notes":""},{"course":"INGL 3102","section":"D41","professor":"Kevin Kelly","day":"Monday & Wednesday","time":"4:00-5:20","room":"Online","modality":"Online","program":"","notes":""},{"course":"INGL 3201","section":"D57","professor":"Yaniré Díaz","day":"Monday & Wednesday","time":"5:30-6:50","room":"Online","modality":"Online","program":"","notes":""},{"course":"INCO 3005","section":"DB5","professor":"Jesús Ramírez","day":"Monday & Wednesday","time":"8:30-9:50","room":"Online","modality":"Online","program":"GTEC","notes":""},{"course":"INGL 3015","section":"D25","professor":"Geissa Torres","day":"Monday & Wednesday","time":"2:30-3:50","room":"Online","modality":"Online","program":"","notes":""},{"course":"INGL 3102","section":"D40","professor":"Mateo Garcés","day":"Monday & Wednesday","time":"4:00-5:20","room":"Online","modality":"Online","program":"","notes":""},{"course":"INGL 3201","section":"D55","professor":"Jesús Ramírez","day":"Monday & Wednesday","time":"5:30-6:50","room":"Online","modality":"Online","program":"","notes":""},{"course":"INGL 3015","section":"DC0","professor":"Geissa Torres","day":"Friday","time":"9:00-11:50","room":"Online","modality":"Online","program":"","notes":""},{"course":"INGL 3061","section":"D40","professor":"Monique Guidicelli","day":"Monday & Wednesday","time":"4:00-5:20","room":"Online","modality":"Online","program":"","notes":""},{"course":"INGL 3093","section":"ME5","professor":"Marisol Santiago","day":"Tuesday & Thursday","time":"11:30-12:50","room":"AC-201","modality":"In person","program":"","notes":""},{"course":"INGL 3093","section":"M10","professor":"Marisol Santiago","day":"Tuesday & Thursday","time":"1:00-2:20","room":"AC-201","modality":"In person","program":"","notes":""},{"course":"INGL 3093","section":"M25","professor":"Marisol Santiago","day":"Tuesday & Thursday","time":"2:30-3:50","room":"AC-201","modality":"In person","program":"","notes":""},{"course":"INGL 3093","section":"D56","professor":"Lizette Rosa","day":"Tuesday & Thursday","time":"5:30-6:50","room":"Online","modality":"Online","program":"Nursing","notes":""},{"course":"INGL 3101","section":"MA0","professor":"Monique Guidicelli","day":"Tuesday & Thursday","time":"7:00-8:20","room":"AC-202","modality":"In person","program":"Nursing","notes":""},{"course":"INGL 3103","section":"MB5","professor":"Kevin Kelly","day":"Tuesday & Thursday","time":"8:30-9:50","room":"AC-203","modality":"In person","program":"Biology","notes":""},{"course":"INGL 3103","section":"ME5","professor":"Kevin Kelly","day":"Tuesday & Thursday","time":"11:30-12:50","room":"AC-202","modality":"In person","program":"Biology","notes":""},{"course":"INGL 3103","section":"M10","professor":"Kevin Kelly","day":"Tuesday & Thursday","time":"1:00-2:20","room":"AC-202","modality":"In person","program":"Communications","notes":""},{"course":"INGL 3101","section":"QA0","professor":"Lizette Rosa","day":"Tuesday & Thursday","time":"7:00-8:20","room":"AC-203","modality":"In person","program":"Nursing","notes":""},{"course":"INGL 3101","section":"ME5","professor":"Lizette Rosa","day":"Tuesday & Thursday","time":"11:30-12:50","room":"AC-203","modality":"In person","program":"GTEC","notes":""},{"course":"INGL 3101","section":"QB6","professor":"Monique Guidicelli","day":"Tuesday & Thursday","time":"8:30-9:50","room":"AC-202","modality":"In person","program":"Biology","notes":""},{"course":"INGL 3101","section":"QE5","professor":"Mateo Garcés","day":"Tuesday & Thursday","time":"11:30-12:50","room":"AC-204","modality":"In person","program":"Communications","notes":""},{"course":"INGL 3101","section":"M10","professor":"Mateo Garcés","day":"Tuesday & Thursday","time":"1:00-2:20","room":"AC-306","modality":"In person","program":"Communications","notes":""},{"course":"INGL 3101","section":"M25","professor":"Mateo Garcés","day":"Tuesday & Thursday","time":"2:30-3:50","room":"AC-306","modality":"In person","program":"Biology","notes":""},{"course":"INGL 3015","section":"D40","professor":"Mateo Garcés","day":"Tuesday & Thursday","time":"4:00-5:20","room":"Online","modality":"Online","program":"","notes":""},{"course":"INCO 4008","section":"DB5","professor":"Jesús Ramírez","day":"Tuesday & Thursday","time":"8:30-9:50","room":"Online","modality":"Online","program":"","notes":""},{"course":"INCO 4008","section":"D10","professor":"Jesús Ramírez","day":"Tuesday & Thursday","time":"1:00-2:20","room":"Online","modality":"Online","program":"","notes":""},{"course":"INGL 3221","section":"D40","professor":"Kevin Kelly","day":"Tuesday & Thursday","time":"4:00-5:20","room":"Online","modality":"Online","program":"","notes":""},{"course":"INGL 3201","section":"D56","professor":"Yaniré Díaz","day":"Tuesday & Thursday","time":"5:30-6:50","room":"Online","modality":"Online","program":"","notes":""}];
-
-/* ====================== EXCEL PARSER (for uploading other schedules) ====================== */
-const COURSE_RE=/(INGL|INCO)\s*(\d{4})/i;
-const SEC_RE=/\b([LMQD](?:[A-E]\d|\d{2}))\b\.?/i;
-const TIME_RE=/\d{1,2}:\d{2}\s*[-\u2013]\s*\d{1,2}:\d{2}/;
-
+/* ====================== EXCEL PARSER (upload other terms) ====================== */
+const COURSE_RE=/(INGL|INCO|EDPE)\s*(\d{4})/i;
+const SEC_RE=/\b([LMQDH](?:[A-E]{1,2}\d|\d{2}))\b\.?/i;
+const TIME_RE=/\d{1,2}:\d{2}\s*[-–]\s*\d{1,2}:\d{2}/;
 function cleanRoom(s){s=(s||"").replace(/\s+/g," ").trim();const m=s.match(/AC[- ]?\d+/i);
-  if(m){return m[0].replace(/\s/,"-").toUpperCase();}return s;}
-
+  if(m){const cupo=s.match(/CUPO:\s*(\d+)/i);return m[0].replace(/\s/,"-").toUpperCase()+(cupo?" (Cap: "+cupo[1]+")":"");}return s;}
+function matchProf(t){
+  for(const k of PROF_KEYS){
+    const names=[k].concat(PROFESSORS[k].aliases||[]);
+    for(const nm of names){ if(new RegExp("\\b"+nm+"\\b","i").test(t)) return PROFESSORS[k].name; }
+  }
+  return "";
+}
+function twoCreditDefault(course){return (course==="INCO 4008"||course==="INCO 4006")?2:3;}
 function parseGrid(grid){
   const n=grid.length;
   const cell=(r,c)=>(grid[r]&&grid[r][c]!=null)?String(grid[r][c]).trim():"";
   const rowText=r=>(grid[r]||[]).map(x=>String(x==null?"":x));
+  /* MJ divider: a column-A cell containing TUES, else a row with >=4 "MJ" cells */
   let mjDiv=-1;
-  for(let r=0;r<n;r++){if(rowText(r).filter(v=>v.trim().toUpperCase()==="MJ").length>=4){mjDiv=r;break;}}
+  for(let r=0;r<n;r++){if(/TUES/i.test(cell(r,0))){mjDiv=r;break;}}
+  if(mjDiv<0){for(let r=0;r<n;r++){if(rowText(r).filter(v=>v.trim().toUpperCase()==="MJ").length>=4){mjDiv=r;break;}}}
   if(mjDiv<0)mjDiv=Math.floor(n/2);
   const tm=r=>rowText(r).filter(v=>TIME_RE.test(v)).length;
   let lwTimeRow=-1,lwBest=0,mjTimeRow=-1,mjBest=0;
   for(let r=0;r<n;r++){const m=tm(r);if(m>=2){if(r<mjDiv&&m>lwBest){lwBest=m;lwTimeRow=r;}if(r>mjDiv&&m>mjBest){mjBest=m;mjTimeRow=r;}}}
   if(lwTimeRow<0)lwTimeRow=Math.max(0,mjDiv-3);
-  if(mjTimeRow<0)mjTimeRow=mjDiv+2;
+  if(mjTimeRow<0)mjTimeRow=mjDiv+1;
   const friCols=new Set();
   for(let r=0;r<=lwTimeRow+1&&r<n;r++){rowText(r).forEach((v,c)=>{if(/FRIDAY/i.test(v))friCols.add(c);});}
   const rooms={};let cur="";
-  for(let r=0;r<n;r++){const a=cell(r,0);if(a)cur=a;rooms[r]=cur;}
+  for(let r=lwTimeRow+1;r<n;r++){const a=cell(r,0);if(a&&!/TUES/i.test(a))cur=a;rooms[r]=cur;}
   const out=[];
-  const maxC=Math.max(...grid.map(row=>row?row.length:0),12);
+  const maxC=Math.max.apply(null,grid.map(row=>row?row.length:0).concat([12]));
   const band=r=>(r>lwTimeRow&&r<mjDiv)?"LW":(r>mjTimeRow?"MJ":null);
   const PROG_KEYS=Object.keys(PROGRAM_LABELS);
   for(let r=0;r<n;r++){
@@ -351,60 +410,43 @@ function parseGrid(grid){
       if(!t||!COURSE_RE.test(t))continue;
       const cm=t.match(COURSE_RE);const course=cm[1].toUpperCase()+" "+cm[2];
       const sm=t.match(SEC_RE);const section=sm?sm[1].toUpperCase():"";
-      let prof="";
-      for(const k of PROF_KEYS){if(new RegExp("\\b"+k+"\\b","i").test(t)){prof=PROFESSORS[k].name;break;}}
-      const distance=/DISTANCIA/i.test(t)||section.charAt(0)==="D";
-      const lunes=/LUNES SOLAMENTE/i.test(t);
-      let day=friCols.has(c)?"Friday":(bd==="LW"?(lunes?"Monday (only)":"Monday & Wednesday"):"Tuesday & Thursday");
+      const prof=matchProf(t);
+      const pfx=section?section.charAt(0):"";
+      const modality=pfx==="D"?"Online":(pfx==="H"?"Hybrid":"In person");
+      let day=friCols.has(c)?"Friday":(bd==="LW"?"Monday & Wednesday":"Tuesday & Thursday");
       let time=(friCols.has(c)||bd==="LW")?cell(lwTimeRow,c):cell(mjTimeRow,c);
-      const room=distance?"Online":cleanRoom(rooms[r]);
+      const room=modality==="Online"?"Online":cleanRoom(rooms[r]);
       const progs=[];
       for(const k of PROG_KEYS){if(new RegExp("\\b"+k+"\\b","i").test(t)&&!progs.includes(PROGRAM_LABELS[k]))progs.push(PROGRAM_LABELS[k]);}
-      const program=progs.join(" / ");
-      let notes=t.replace(COURSE_RE,"");
-      if(sm)notes=notes.replace(sm[0],"");
-      notes=notes.replace(/DISTANCIA/ig,"").replace(/LUNES SOLAMENTE/ig,"").replace(/\bESPACIOS?\b/ig,"");
-      for(const k of PROF_KEYS)notes=notes.replace(new RegExp("\\b"+k+"\\b","ig"),"");
-      for(const k of PROG_KEYS)notes=notes.replace(new RegExp("\\b"+k+"\\b","ig"),"");
-      notes=notes.replace(/\s+/g," ").replace(/^[\s.]+|[\s.]+$/g,"");
-      const num=notes.match(/\b(\d+)\b/);
-      notes=num?num[1]+" reserved seats":"";
-      out.push({course,section,professor:prof,day,time,room,modality:distance?"Online":"In person",program,notes});
+      let seats="";const ms=t.match(/\((\d+)\)/);if(ms)seats=ms[1];else{const mg=t.match(/GTEC\s+(\d+)/i);if(mg)seats=mg[1];}
+      out.push({course,section,professor:prof,day,time,room,modality,program:progs.join(" / "),seats,credits:twoCreditDefault(course),notes:""});
     }
   }
   return out;
 }
 
+/* ====================== HASH / AUTH ====================== */
+const pwKey=email=>"fsched_pw_"+norm(email);
+function norm(s){return (s||"").toString().toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").trim();}
+async function sha256(str){
+  try{const buf=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(str));
+    return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,"0")).join("");}
+  catch(e){let h=5381;for(let i=0;i<str.length;i++){h=((h<<5)+h)+str.charCodeAt(i);h|=0;}return "f"+(h>>>0).toString(16);}
+}
+function profKeyFromEmail(email){const e=norm(email);for(const k of PROF_KEYS){if(norm(PROFESSORS[k].email)===e)return k;}return null;}
+function nameMatches(sn,fn){const a=norm(sn),b=norm(fn);if(!a)return false;if(a===b)return true;return b.split(" ")[0]===a.split(" ")[0]&&(b.startsWith(a)||a.startsWith(b));}
+
 /* ====================== UI ====================== */
 const $=id=>document.getElementById(id);
+function refreshHeader(){$("termLabel").textContent=TERM;}
 $("rosterList").textContent=TEACH_KEYS.map(k=>PROFESSORS[k].name).join(" · ");
-
-/* ---- local (per-browser) password storage with graceful fallback ---- */
-const mem={};
-const store={
-  get(k){try{return localStorage.getItem(k);}catch(e){return (k in mem)?mem[k]:null;}},
-  set(k,v){try{localStorage.setItem(k,v);}catch(e){mem[k]=v;}},
-  remove(k){try{localStorage.removeItem(k);}catch(e){delete mem[k];}}
-};
-const pwKey=email=>"fsched_pw_"+norm(email);
-async function sha256(str){
-  try{
-    const buf=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(str));
-    return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,"0")).join("");
-  }catch(e){
-    let h=5381;for(let i=0;i<str.length;i++){h=((h<<5)+h)+str.charCodeAt(i);h|=0;}
-    return "f"+(h>>>0).toString(16);
-  }
-}
-
+refreshHeader();
 function showError(m){const e=$("loginError");e.textContent=m;e.classList.add("show");}
 function clearError(){$("loginError").classList.remove("show");}
-function showStep(which){
-  ["authEmail","authCreate","authSignin"].forEach(id=>$(id).classList.toggle("hidden",id!==which));
-}
+function showStep(which){["authEmail","authCreate","authSignin"].forEach(id=>$(id).classList.toggle("hidden",id!==which));}
+function showView(id){["loginView","schedView","adminView"].forEach(v=>$(v).classList.toggle("hidden",v!==id));window.scrollTo({top:0,behavior:"smooth"});}
 
 let pendingKey=null, pendingEmail="";
-
 function onContinue(){
   clearError();
   const email=$("emailInput").value.trim();
@@ -423,116 +465,232 @@ function onContinue(){
 }
 async function onCreate(){
   clearError();
-  const p1=$("newPw").value, p2=$("newPw2").value;
+  const p1=$("newPw").value,p2=$("newPw2").value;
   if(p1.length<4){showError("Your password must be at least 4 characters.");return;}
   if(p1!==p2){showError("The two passwords do not match. Please try again.");return;}
-  store.set(pwKey(pendingEmail), await sha256(p1));
-  proceed();
+  store.set(pwKey(pendingEmail),await sha256(p1)); proceed();
 }
 async function onSignin(){
   clearError();
-  const p=$("pwInput").value;
   const stored=store.get(pwKey(pendingEmail));
-  if(stored && (await sha256(p))===stored){ proceed(); }
-  else { showError("Incorrect password. Please try again, or use “Forgot your password?” to reset it."); }
+  if(stored&&(await sha256($("pwInput").value))===stored){proceed();}
+  else showError("Incorrect password. Please try again, or use “Forgot your password?” to reset it.");
 }
 function onForgot(){
-  store.remove(pwKey(pendingEmail));
-  clearError();
+  store.remove(pwKey(pendingEmail));clearError();
   const name=PROFESSORS[pendingKey].name.split(" ")[0];
   $("createWelcome").textContent="Password reset, "+name+". Create a new password.";
-  showStep("authCreate"); $("newPw").value=""; $("newPw2").value=""; $("newPw").focus();
+  showStep("authCreate");$("newPw").value="";$("newPw2").value="";$("newPw").focus();
 }
-function backToEmail(){ clearError(); showStep("authEmail"); $("emailInput").focus(); }
+function backToEmail(){clearError();showStep("authEmail");$("emailInput").focus();}
+function proceed(){const prof=PROFESSORS[pendingKey];if(prof.admin)renderAdmin(prof);else renderProfSchedule(prof);}
 
-function proceed(){
-  const prof=PROFESSORS[pendingKey];
-  if(prof.admin) renderAdmin(prof); else renderProfSchedule(prof);
-}
-
-/* ---- shared schedule building ---- */
+/* ---- shared ---- */
 const DAY_ORDER={"Monday & Wednesday":1,"Monday (only)":2,"Tuesday & Thursday":3,"Friday":4};
 function timeStart(t){const m=(t||"").match(/(\d{1,2}):(\d{2})/);if(!m)return 9999;let h=+m[1];const mm=+m[2];if(h<7)h+=12;return h*60+mm;}
 function coursesFor(prof,key){return COURSES.filter(c=>nameMatches(c.professor,prof.name)||(key&&norm(c.professor)===norm(key)));}
 function sortSched(list){return list.slice().sort((a,b)=>(DAY_ORDER[a.day]||9)-(DAY_ORDER[b.day]||9)||timeStart(a.time)-timeStart(b.time));}
+function crOf(c){return (typeof c.credits==="number")?c.credits:(parseInt(c.credits,10)||3);}
 function statsOf(list){const pres=list.filter(c=>c.modality==="In person").length;
-  return{total:list.length,credits:list.reduce((s,c)=>s+courseCredits(c.course),0),preps:new Set(list.map(c=>c.course)).size,pres,dist:list.length-pres,unex:list.filter(isUnex).length};}
+  const hyb=list.filter(c=>c.modality==="Hybrid").length;const dist=list.filter(c=>c.modality==="Online").length;
+  return{total:list.length,credits:list.reduce((s,c)=>s+crOf(c),0),preps:new Set(list.map(c=>c.course)).size,pres,hyb,dist,unex:list.filter(isUnex).length};}
 function chipsHTML(s){return '<span class="chip"><b>'+s.total+'</b>courses</span>'+
   '<span class="chip chip-key"><b>'+s.credits+'</b>total credits</span>'+
   '<span class="chip chip-key"><b>'+s.preps+'</b>preparations</span>'+
   '<span class="chip chip-print-hide"><b>'+s.pres+'</b>in person</span>'+
+  (s.hyb>0?'<span class="chip chip-print-hide"><b>'+s.hyb+'</b>hybrid</span>':'')+
   '<span class="chip chip-print-hide"><b>'+s.dist+'</b>online</span>'+
   (s.unex>0?'<span class="chip chip-unex"><b>'+s.unex+'</b>UNEX</span>':'');}
+function modBadge(m){if(m==="Online")return '<span class="badge dist">Online</span>';
+  if(m==="Hybrid")return '<span class="badge hyb">Hybrid</span>';return '<span class="badge pres">In person</span>';}
 function tableHTML(list){
   if(list.length===0) return '<div class="empty-state"><div class="big">No courses found</div><div>There are no courses assigned to this professor in the loaded schedule.</div></div>';
-  const dash='<span class="dash">—</span>';
-  let rows='';
+  const dash='<span class="dash">—</span>';let rows='';
   for(const c of sortSched(list)){
-    const badge=c.modality==="Online"?'<span class="badge dist">Online</span>':'<span class="badge pres">In person</span>';
     rows+='<tr>'+
       '<td class="c-course">'+c.course+'</td>'+
-      '<td class="c-cr">'+courseCredits(c.course)+'</td>'+
+      '<td class="c-cr">'+crOf(c)+'</td>'+
       '<td class="c-sec">'+(c.section||dash)+'</td>'+
       '<td class="day-cell">'+c.day+'</td>'+
       '<td class="time-cell">'+(c.time||dash)+'</td>'+
       '<td class="room-cell">'+(c.room||dash)+'</td>'+
-      '<td>'+badge+'</td>'+
+      '<td>'+modBadge(c.modality)+'</td>'+
       '<td>'+(isUnex(c)?'<span class="badge unex">UNEX</span>':dash)+'</td></tr>';
   }
   return '<div class="table-scroll"><table><thead><tr><th>Course</th><th>Cr.</th><th>Section</th><th>Day</th><th>Time</th><th>Room</th><th>Modality</th><th>UNEX</th></tr></thead><tbody>'+rows+'</tbody></table></div>';
 }
-function showView(id){["loginView","schedView","adminView"].forEach(v=>$(v).classList.toggle("hidden",v!==id));window.scrollTo({top:0,behavior:"smooth"});}
-
 function renderProfSchedule(prof){
   const mine=coursesFor(prof,pendingKey);
-  $("profName").textContent=prof.name;
-  $("profEmail").textContent=prof.email;
+  $("profName").textContent=prof.name;$("profEmail").textContent=prof.email;
   $("profChips").innerHTML=chipsHTML(statsOf(mine));
   $("profSchedBody").innerHTML=tableHTML(mine);
   showView("schedView");
 }
 
-/* ---- admin dashboard ---- */
+/* ---- admin ---- */
 function renderAdmin(admin){
-  $("adminName").textContent=admin.name;
-  $("adminEmail").textContent=admin.email;
-  // summary table
-  let totC=0,totCr=0;
-  let rows='';
-  const sel=$("adminSelect"); sel.innerHTML='';
+  $("adminName").textContent=admin.name;$("adminEmail").textContent=admin.email;
+  renderOverview();renderEditor();
+  showView("adminView");switchTab("tab-overview");
+}
+function renderOverview(){
+  let totC=0,totCr=0,rows='';
+  const sel=$("adminSelect");sel.innerHTML='';
   TEACH_KEYS.forEach(k=>{
-    const prof=PROFESSORS[k];
-    const mine=coursesFor(prof,k);
-    const s=statsOf(mine);
-    totC+=s.total; totCr+=s.credits;
+    const prof=PROFESSORS[k];const mine=coursesFor(prof,k);const s=statsOf(mine);
+    totC+=s.total;totCr+=s.credits;
     rows+='<tr data-key="'+k+'"><td class="c-course">'+prof.name+(prof.admin?' <span class="mini-pill">admin</span>':'')+'</td>'+
       '<td class="c-cr">'+s.total+'</td><td class="c-cr">'+s.credits+'</td><td class="c-cr">'+s.preps+'</td>'+
-      '<td class="c-cr">'+s.pres+'</td><td class="c-cr">'+s.dist+'</td></tr>';
-    const opt=document.createElement("option"); opt.value=k; opt.textContent=prof.name; sel.appendChild(opt);
+      '<td class="c-cr">'+s.pres+'</td><td class="c-cr">'+s.hyb+'</td><td class="c-cr">'+s.dist+'</td><td class="c-cr">'+s.unex+'</td></tr>';
+    const opt=document.createElement("option");opt.value=k;opt.textContent=prof.name;sel.appendChild(opt);
   });
-  $("adminSummaryWrap").innerHTML='<table><thead><tr><th>Professor</th><th>Courses</th><th>Credits</th><th>Preps</th><th>In&nbsp;person</th><th>Online</th></tr></thead><tbody>'+rows+
-    '<tr class="tot-row"><td>Total ('+TEACH_KEYS.length+' faculty)</td><td class="c-cr">'+totC+'</td><td class="c-cr">'+totCr+'</td><td class="c-cr">—</td><td class="c-cr">—</td><td class="c-cr">—</td></tr>'+
-    '</tbody></table>';
-  // clickable rows
+  $("adminSummaryWrap").innerHTML='<table><thead><tr><th>Professor</th><th>Courses</th><th>Credits</th><th>Preps</th><th>In&nbsp;person</th><th>Hybrid</th><th>Online</th><th>UNEX</th></tr></thead><tbody>'+rows+
+    '<tr class="tot-row"><td>Total ('+TEACH_KEYS.length+' faculty)</td><td class="c-cr">'+totC+'</td><td class="c-cr">'+totCr+'</td><td class="c-cr">—</td><td class="c-cr">—</td><td class="c-cr">—</td><td class="c-cr">—</td><td class="c-cr">—</td></tr></tbody></table>';
   $("adminSummaryWrap").querySelectorAll("tr[data-key]").forEach(tr=>{
-    tr.style.cursor="pointer";
-    tr.addEventListener("click",()=>{sel.value=tr.dataset.key; renderAdminDetail(tr.dataset.key);});
+    tr.style.cursor="pointer";tr.addEventListener("click",()=>{sel.value=tr.dataset.key;renderAdminDetail(tr.dataset.key);});
   });
-  // selector
-  sel.value=admin._key||TEACH_KEYS[0];
-  renderAdminDetail(sel.value);
-  showView("adminView");
+  sel.value=TEACH_KEYS[0];renderAdminDetail(sel.value);
 }
 function renderAdminDetail(key){
-  const prof=PROFESSORS[key];
-  const mine=coursesFor(prof,key);
-  $("adminDetail").innerHTML=
-    '<div class="detail-head"><strong>'+prof.name+'</strong> · '+prof.email+'</div>'+
-    '<div class="chips">'+chipsHTML(statsOf(mine))+'</div>'+
-    tableHTML(mine);
+  const prof=PROFESSORS[key];const mine=coursesFor(prof,key);
+  $("adminDetail").innerHTML='<div class="detail-head"><strong>'+prof.name+'</strong> · '+prof.email+'</div>'+
+    '<div class="chips">'+chipsHTML(statsOf(mine))+'</div>'+tableHTML(mine);
 }
 
-/* ---- events ---- */
+/* ---- tabs ---- */
+function switchTab(id){
+  document.querySelectorAll("#adminTabs .tabbtn").forEach(b=>b.classList.toggle("active",b.dataset.tab===id));
+  ["tab-overview","tab-editor","tab-plantilla"].forEach(t=>$(t).classList.toggle("hidden",t!==id));
+  if(id==="tab-plantilla")renderPlantilla();
+}
+document.querySelectorAll("#adminTabs .tabbtn").forEach(b=>b.addEventListener("click",()=>switchTab(b.dataset.tab)));
+
+/* ====================== EDITOR ====================== */
+const DAY_OPTS=["Monday & Wednesday","Tuesday & Thursday","Friday","Monday (only)"];
+const MOD_OPTS=["In person","Hybrid","Online"];
+function renderEditor(){
+  $("termInput").value=TERM;
+  const body=$("edBody");body.innerHTML="";
+  COURSES.forEach((c,i)=>body.appendChild(edRow(c,i)));
+  $("edStatus").textContent="";
+}
+function edRow(c,i){
+  const tr=document.createElement("tr");tr.dataset.i=i;
+  const opt=(arr,val)=>arr.map(o=>'<option'+(o===val?' selected':'')+'>'+o+'</option>').join('');
+  const profOpt=TEACH_KEYS.map(k=>{const nm=PROFESSORS[k].name;return '<option'+(nameMatches(c.professor,nm)?' selected':'')+'>'+nm+'</option>';}).join('');
+  tr.innerHTML=
+    '<td><input type="text" class="w-course f-course" value="'+esc(c.course)+'"></td>'+
+    '<td><input type="number" class="cr-in f-credits" min="0" max="6" value="'+crOf(c)+'"></td>'+
+    '<td><input type="text" class="w-sec f-section" value="'+esc(c.section)+'"></td>'+
+    '<td><select class="f-prof">'+profOpt+'</select></td>'+
+    '<td><select class="f-day">'+opt(DAY_OPTS,c.day)+'</select></td>'+
+    '<td><input type="text" class="w-time f-time" value="'+esc(c.time)+'"></td>'+
+    '<td><input type="text" class="w-room f-room" value="'+esc(c.room)+'"></td>'+
+    '<td><select class="f-mod">'+opt(MOD_OPTS,c.modality)+'</select></td>'+
+    '<td><input type="text" class="f-prog" value="'+esc(c.program||"")+'" style="min-width:90px"></td>'+
+    '<td><input type="text" class="f-seats" value="'+esc(c.seats||"")+'" style="width:54px"></td>'+
+    '<td class="ctr"><input type="checkbox" class="ux f-unex"'+(isUnex(c)?' checked':'')+'></td>'+
+    '<td><button class="ed-del" title="Delete">✕</button></td>';
+  tr.querySelector(".ed-del").addEventListener("click",()=>{collectEditor();COURSES.splice(+tr.dataset.i,1);renderEditor();markDirty();});
+  return tr;
+}
+function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;");}
+function collectEditor(){
+  TERM=$("termInput").value.trim()||TERM;
+  const rows=$("edBody").querySelectorAll("tr");
+  const arr=[];
+  rows.forEach(tr=>{
+    const unex=tr.querySelector(".f-unex").checked;
+    arr.push({
+      course:tr.querySelector(".f-course").value.trim(),
+      credits:parseInt(tr.querySelector(".f-credits").value,10)||3,
+      section:tr.querySelector(".f-section").value.trim(),
+      professor:tr.querySelector(".f-prof").value,
+      day:tr.querySelector(".f-day").value,
+      time:tr.querySelector(".f-time").value.trim(),
+      room:tr.querySelector(".f-room").value.trim(),
+      modality:tr.querySelector(".f-mod").value,
+      program:tr.querySelector(".f-prog").value.trim(),
+      seats:tr.querySelector(".f-seats").value.trim(),
+      unex:unex, notes:""
+    });
+  });
+  COURSES=arr;
+}
+function markDirty(){$("edStatus").textContent="Unsaved changes";$("edStatus").style.color="var(--amber)";}
+$("edBody").addEventListener("input",markDirty);
+$("edBody").addEventListener("change",markDirty);
+$("termInput").addEventListener("input",markDirty);
+$("edAdd").addEventListener("click",()=>{collectEditor();
+  COURSES.push({course:"INGL ",credits:3,section:"",professor:PROFESSORS[TEACH_KEYS[0]].name,day:"Monday & Wednesday",time:"",room:"",modality:"In person",program:"",seats:"",unex:false,notes:""});
+  renderEditor();markDirty();
+  const rows=$("edBody").querySelectorAll("tr");rows[rows.length-1].querySelector(".f-course").focus();});
+$("edSave").addEventListener("click",()=>{collectEditor();persist();refreshHeader();renderOverview();
+  $("edStatus").textContent="✓ Saved to this browser";$("edStatus").style.color="var(--green)";});
+$("edRevert").addEventListener("click",()=>{
+  if(!confirm("Discard changes in this browser and revert to the published schedule?"))return;
+  store.remove(DATA_KEY);location.reload();});
+$("edDownloadHtml").addEventListener("click",downloadUpdatedHTML);
+
+/* ====================== DOWNLOAD UPDATED HTML ====================== */
+function downloadUpdatedHTML(){
+  collectEditor();persist();refreshHeader();renderOverview();
+  let html="<!DOCTYPE html>\n"+document.documentElement.outerHTML;
+  const block="/*DATA_START*/\nlet TERM = "+JSON.stringify(TERM)+";\nlet COURSES = "+JSON.stringify(COURSES)+";\nlet UNEX_INIT = [];\n/*DATA_END*/";
+  html=html.replace(/\/\*DATA_START\*\/[\s\S]*?\/\*DATA_END\*\//,()=>block);
+  const blob=new Blob([html],{type:"text/html;charset=utf-8"});
+  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="index.html";
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  $("edStatus").textContent="✓ Downloaded index.html — upload it to GitHub to publish";$("edStatus").style.color="var(--green)";
+}
+
+/* ====================== PLANTILLA PROPUESTA ====================== */
+function startEnd(time){const m=(time||"").match(/(\d{1,2}:\d{2})\s*[-–]\s*(\d{1,2}:\d{2})/);return m?[m[1],m[2]]:["",""];}
+function horarioCode(time){const s=timeStart(time);if(!s||s>=9999)return "";if(s>=16*60)return "N";if(s>=(12*60+30))return "V";return "D";}
+function diaLabel(day){return {"Monday & Wednesday":"L y W","Tuesday & Thursday":"M y J","Friday":"V","Monday (only)":"L"}[day]||day;}
+function modCode(m){return m==="Online"?"D":(m==="Hybrid"?"H":"P");}
+function plantillaRows(){
+  const all=COURSES.slice().sort((a,b)=>a.professor.localeCompare(b.professor)||a.course.localeCompare(b.course)||timeStart(a.time)-timeStart(b.time));
+  return all.map((c,i)=>{const[hi,hf]=startEnd(c.time);
+    const salon=c.modality==="Online"?"A distancia":(c.room||"");
+    return [i+1,horarioCode(c.time),"",c.course,"",crOf(c),"",modCode(c.modality),c.section,diaLabel(c.day),hi,hf,salon,c.seats||"",c.professor,c.program||""];
+  });
+}
+const PL_HEADERS=["Núm.","HORARIO D/V/N/S","SECUENCIA CURRICULAR Y AÑO","CÓDIGO DEL CURSO","DESCRIPCIÓN DEL CURSO","CR","TIPO","MODALIDAD (P H D)","SECCIÓN","DÍA","HORA DE INICIO","HORA DE TERMINACIÓN","SALÓN","CUPO","NOMBRE DEL PROFESOR","OBSERVACIONES"];
+function renderPlantilla(){
+  const rows=plantillaRows();
+  let body='';
+  rows.forEach(r=>{body+='<tr>'+r.map((v,idx)=>'<td class="'+((idx===0||idx===5)?'num':(idx===6||idx===7||idx===9?'ctr':''))+'">'+esc(v)+'</td>').join('')+'</tr>';});
+  $("plBody").innerHTML=
+    '<div class="pl-header"><div class="u1">Universidad de Puerto Rico en Arecibo</div>'+
+    '<div class="u2">Decanato de Asuntos Académicos</div>'+
+    '<div class="u3">Propuesta de Programación Académica</div>'+
+    '<div class="u4">'+esc(TERM)+'</div></div>'+
+    '<div class="pl-meta"><b>Departamento:</b> Inglés</div>'+
+    '<div class="table-scroll"><table class="pl-table"><thead><tr>'+PL_HEADERS.map(h=>'<th>'+h+'</th>').join('')+'</tr></thead><tbody>'+body+'</tbody></table></div>'+
+    '<div class="secnote" style="margin-top:14px">Leyenda — HORARIO: D=Diurno, V=Vespertino, N=Nocturno, S=Sabatino · MODALIDAD: P=Presencial, H=Híbrido, D=Distancia. Columnas TIPO, SECUENCIA CURRICULAR y DESCRIPCIÓN quedan para completarse manualmente.</div>';
+}
+function downloadPlantillaXlsx(){
+  const rows=plantillaRows();
+  const aoa=[];
+  aoa.push(["Universidad de Puerto Rico en Arecibo"]);
+  aoa.push(["Decanato de Asuntos Académicos"]);
+  aoa.push(["Propuesta de Programación Académica"]);
+  aoa.push([TERM]);
+  aoa.push(["Departamento:","Inglés"]);
+  aoa.push([]);
+  aoa.push(PL_HEADERS);
+  rows.forEach(r=>aoa.push(r));
+  const ws=XLSX.utils.aoa_to_sheet(aoa);
+  ws["!cols"]=[{wch:5},{wch:9},{wch:22},{wch:13},{wch:26},{wch:4},{wch:8},{wch:12},{wch:9},{wch:8},{wch:10},{wch:12},{wch:14},{wch:6},{wch:22},{wch:20}];
+  const wb=XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb,ws,"Plantilla Propuesta");
+  XLSX.writeFile(wb,"Plantilla_Propuesta_Programa_C62.xlsx");
+}
+$("plDownload").addEventListener("click",downloadPlantillaXlsx);
+$("plPrint").addEventListener("click",()=>window.print());
+
+/* ====================== EVENTS ====================== */
 $("continueBtn").addEventListener("click",onContinue);
 $("emailInput").addEventListener("keydown",e=>{if(e.key==="Enter")onContinue();});
 $("createBtn").addEventListener("click",onCreate);
@@ -543,17 +701,13 @@ $("pwInput").addEventListener("keydown",e=>{if(e.key==="Enter")onSignin();});
 $("signinBack").addEventListener("click",backToEmail);
 $("forgotBtn").addEventListener("click",onForgot);
 $("adminSelect").addEventListener("change",e=>renderAdminDetail(e.target.value));
-
 function signOut(){clearError();showStep("authEmail");$("emailInput").value="";pendingKey=null;pendingEmail="";showView("loginView");$("emailInput").focus();}
 $("backBtn").addEventListener("click",signOut);
 $("adminBack").addEventListener("click",signOut);
 $("printBtn").addEventListener("click",()=>window.print());
-$("adminPrint").addEventListener("click",()=>window.print());
-
 $("uploadBtn").addEventListener("click",()=>$("fileInput").click());
 $("fileInput").addEventListener("change",function(){
-  const f=this.files[0];if(!f)return;
-  const st=$("uploadStatus");st.classList.remove("show");
+  const f=this.files[0];if(!f)return;const st=$("uploadStatus");st.classList.remove("show");
   const reader=new FileReader();
   reader.onload=e=>{
     try{
@@ -562,17 +716,10 @@ $("fileInput").addEventListener("change",function(){
       const grid=XLSX.utils.sheet_to_json(wb.Sheets[sheetName],{header:1,raw:false,defval:""});
       const parsed=parseGrid(grid);
       if(parsed.length===0)throw new Error("No courses detected in the «"+sheetName+"» tab.");
-      COURSES=parsed;
-      st.style.color="var(--green)";
-      st.textContent="✓ Loaded "+parsed.length+" courses from «"+f.name+"» (tab: "+sheetName+"). Refreshing overview…";
+      COURSES=parsed;persist();renderOverview();renderEditor();
+      st.style.color="var(--green)";st.textContent="✓ Loaded "+parsed.length+" courses from «"+f.name+"» (tab: "+sheetName+"). Review in Edit courses, then Download updated index.html to publish.";
       st.classList.add("show");
-      renderAdmin(PROFESSORS[pendingKey]); // refresh dashboard with new data
-      $("uploadStatus").classList.add("show");
-    }catch(err){
-      st.style.color="#9a2b2b";
-      st.textContent="Could not process the file: "+err.message;
-      st.classList.add("show");
-    }
+    }catch(err){st.style.color="#9a2b2b";st.textContent="Could not process the file: "+err.message;st.classList.add("show");}
   };
   reader.readAsArrayBuffer(f);
 });
