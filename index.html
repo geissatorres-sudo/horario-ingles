@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+https://geissatorres-sudo.github.io/horario-ingles/<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -160,6 +160,39 @@ tbody tr:hover{background:var(--gold-soft)}
 .pl-table tbody tr:nth-child(even){background:#faf8f1}
 .pl-table .num{text-align:center;color:var(--muted)}
 .pl-table .ctr{text-align:center}
+/* grid view */
+.grid-legend{margin-bottom:16px}
+.leg-controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+.leg-controls .lc-label{font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:700;margin-right:2px}
+.legend-row{display:flex;flex-wrap:wrap;gap:9px}
+.leg-item{display:flex;align-items:center;gap:7px;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:4px 12px 4px 6px;font-size:.8rem;color:var(--navy);font-weight:600;cursor:pointer;user-select:none;transition:opacity .12s,filter .12s}
+.leg-item.off{opacity:.42;filter:grayscale(.65)}
+.leg-item .leg-chk{font-size:.9em;color:var(--green);width:11px;display:inline-block}
+.leg-item input[type=color]{width:22px;height:22px;border:none;border-radius:50%;background:none;cursor:pointer;padding:0}
+.band-title{font-family:'Fraunces',serif;font-weight:600;color:var(--navy);margin:18px 0 8px;font-size:1.05rem}
+.gridwrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin-bottom:8px}
+table.sgrid{border-collapse:collapse;width:100%;min-width:940px;font-size:.72rem}
+table.sgrid th,table.sgrid td{border:1px solid var(--line);padding:3px;vertical-align:top}
+table.sgrid thead th{background:var(--navy);color:#fff;font-size:.6rem;text-transform:uppercase;padding:6px 4px;text-align:center;white-space:nowrap}
+table.sgrid td.roomcell,table.sgrid th.roomhdr{background:var(--paper);font-weight:700;color:var(--navy);white-space:nowrap;font-size:.68rem;text-align:left;position:sticky;left:0;z-index:1}
+table.sgrid th.roomhdr{z-index:3;color:#fff;background:var(--navy)}
+table.sgrid td.fri{background:#fbf6e6}
+.cell{min-width:96px}
+.gchip{display:block;border-radius:6px;padding:3px 6px;margin:2px 0;font-weight:600;color:#17202a;cursor:pointer;line-height:1.2;border:1px solid rgba(0,0,0,.12)}
+.gchip:hover{outline:2px solid var(--navy);outline-offset:1px}
+.gchip .gc-sec{font-weight:800}
+.gchip .gc-x{display:block;font-weight:400;font-size:.9em;opacity:.75}
+.cell-add{display:block;width:100%;background:none;border:1px dashed transparent;color:var(--muted);font-size:.95rem;cursor:pointer;border-radius:6px;padding:0;line-height:1.2}
+.cell:hover .cell-add{border-color:var(--line)}
+.modal-bg{position:fixed;inset:0;background:rgba(10,35,66,.45);display:flex;align-items:center;justify-content:center;z-index:50;padding:18px}
+.modal{background:#fff;border-radius:16px;padding:24px;max-width:470px;width:100%;box-shadow:0 30px 70px -20px rgba(0,0,0,.5);max-height:92vh;overflow:auto}
+.modal h3{font-family:'Fraunces',serif;color:var(--navy);margin-bottom:6px;font-size:1.25rem}
+.modal label{display:block;font-size:.68rem;text-transform:uppercase;letter-spacing:.05em;color:var(--navy);font-weight:700;margin:11px 0 4px}
+.modal input,.modal select{width:100%}
+.modal-row{display:flex;gap:10px}.modal-row>div{flex:1}
+.modal-check{display:flex;align-items:center;gap:8px;margin-top:14px;font-size:.9rem;color:var(--navy)}
+.modal-check input{width:18px;height:18px}
+.modal-actions{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
 .hidden{display:none!important}
 @media (max-width:560px){.card{padding:20px}.crest .titles h1{font-size:1.25rem}.sched-head .who h2{font-size:1.5rem}}
 @media print{header.masthead,.foot-actions,.chip-print-hide,.tabbar,.ed-toolbar,.upload-box,.divider{display:none}
@@ -247,6 +280,7 @@ tbody tr:hover{background:var(--gold-soft)}
 
     <div class="tabbar" id="adminTabs">
       <button class="tabbtn active" data-tab="tab-overview">Overview</button>
+      <button class="tabbtn" data-tab="tab-grid">📅 Grid view</button>
       <button class="tabbtn" data-tab="tab-editor">✏️ Edit courses</button>
       <button class="tabbtn" data-tab="tab-plantilla">Plantilla Propuesta Programa</button>
     </div>
@@ -266,6 +300,21 @@ tbody tr:hover{background:var(--gold-soft)}
           <input type="file" id="fileInput" accept=".xlsx,.xls"></div>
       </div>
       <div id="uploadStatus"></div>
+    </div>
+
+    <!-- GRID VIEW -->
+    <div class="tabpane hidden" id="tab-grid">
+      <div class="ed-note">
+        <b>Visual grid by room and time, colored by professor.</b> Click any course to edit it, or the <b>+</b> in a cell to add one there.
+        Changes sync automatically with <b>Edit courses</b>. Pick each professor's color in the legend below. Online courses appear in the <b>A distancia</b> row.
+      </div>
+      <div class="grid-legend" id="gridLegend"></div>
+      <div id="gridBody"></div>
+      <div class="ed-toolbar" style="margin-top:14px">
+        <button class="btn-primary btn-sm" id="gridAdd">+ Add course</button>
+        <button class="btn-ghost btn-sm" id="gridDownloadHtml">⬇ Download updated index.html</button>
+        <span class="save-status" id="gridStatus"></span>
+      </div>
     </div>
 
     <!-- EDITOR -->
@@ -344,6 +393,7 @@ const PROGRAM_LABELS = {
 let TERM = "Second Semester 2026-2027 · C62 (Jan–May 2027)";
 let COURSES = [{"course":"INGL 3094","section":"LD0","professor":"Marisol Santiago","day":"Monday & Wednesday","time":"10:00-11:30","room":"AC-201","modality":"In person","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3093","section":"LE5","professor":"Marisol Santiago","day":"Monday & Wednesday","time":"11:30-12:50","room":"AC-201","modality":"In person","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3093","section":"L10","professor":"Marisol Santiago","day":"Monday & Wednesday","time":"1:00-2:20","room":"AC-201","modality":"In person","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3202","section":"D56","professor":"Jesús Ramírez","day":"Monday & Wednesday","time":"5:30-6:50","room":"Online","modality":"Online","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3102","section":"QD0","professor":"Lizette Rosa","day":"Monday & Wednesday","time":"10:00-11:30","room":"AC-202","modality":"In person","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3101","section":"LE5","professor":"Lizette Rosa","day":"Monday & Wednesday","time":"11:30-12:50","room":"AC-202","modality":"In person","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3102","section":"Q11","professor":"Lizette Rosa","day":"Monday & Wednesday","time":"1:00-2:20","room":"AC-202","modality":"In person","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3102","section":"LB5","professor":"Carlos González","day":"Monday & Wednesday","time":"8:30-9:50","room":"AC-203","modality":"In person","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3102","section":"LD0","professor":"Carlos González","day":"Monday & Wednesday","time":"10:00-11:30","room":"AC-203","modality":"In person","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3102","section":"LE5","professor":"Carlos González","day":"Monday & Wednesday","time":"11:30-12:50","room":"AC-203","modality":"In person","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3104","section":"H10","professor":"Kevin Kelly","day":"Monday & Wednesday","time":"1:00-2:20","room":"AC-203","modality":"Hybrid","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3102","section":"L25","professor":"Carlos González","day":"Monday & Wednesday","time":"2:30-3:50","room":"AC-203","modality":"In person","program":"Education","seats":"13","notes":"","credits":3},{"course":"INCO 4008","section":"D55","professor":"Carlos González","day":"Monday & Wednesday","time":"5:30-6:50","room":"Online","modality":"Online","program":"","seats":"","notes":"","credits":2},{"course":"INGL 3104","section":"LB5","professor":"Monique Guidicelli","day":"Monday & Wednesday","time":"8:30-9:50","room":"AC-204","modality":"In person","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3102","section":"QE5","professor":"Monique Guidicelli","day":"Monday & Wednesday","time":"11:30-12:50","room":"AC-204","modality":"In person","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3021","section":"","professor":"Monique Guidicelli","day":"Monday & Wednesday","time":"1:00-2:20","room":"AC-204","modality":"In person","program":"Education","seats":"","notes":"","credits":3},{"course":"INGL 3102","section":"Q25","professor":"Monique Guidicelli","day":"Monday & Wednesday","time":"2:30-3:50","room":"AC-204","modality":"In person","program":"Education","seats":"27","notes":"","credits":3},{"course":"INGL 3318","section":"D40","professor":"Kevin Kelly","day":"Monday & Wednesday","time":"4:00-5:20","room":"Online","modality":"Online","program":"","seats":"10","notes":"","credits":3},{"course":"INGL 3202","section":"D55","professor":"Kevin Kelly","day":"Monday & Wednesday","time":"5:30-6:50","room":"Online","modality":"Online","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3102","section":"D11","professor":"Yaniré Díaz","day":"Monday & Wednesday","time":"1:00-2:20","room":"Online","modality":"Online","program":"GTEC","seats":"15","notes":"","credits":3},{"course":"INGL 3012","section":"D25","professor":"Yaniré Díaz","day":"Monday & Wednesday","time":"2:30-3:50","room":"Online","modality":"Online","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3101","section":"D40","professor":"Yaniré Díaz","day":"Monday & Wednesday","time":"4:00-5:20","room":"Online","modality":"Online","program":"Nursing","seats":"","notes":"","credits":3},{"course":"INGL 3015","section":"DC0","professor":"Geissa Torres","day":"Friday","time":"9:00-11:50","room":"Online","modality":"Online","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3015","section":"D10","professor":"Geissa Torres","day":"Friday","time":"1:00-3:50","room":"Online","modality":"Online","program":"","seats":"","notes":"","credits":3},{"course":"INCO 4006","section":"DD0","professor":"Jesús Ramírez","day":"Monday & Wednesday","time":"10:00-11:30","room":"Online","modality":"Online","program":"","seats":"","notes":"","credits":2},{"course":"INGL 3102","section":"D10","professor":"Mateo Garcés","day":"Monday & Wednesday","time":"1:00-2:20","room":"Online","modality":"Online","program":"","seats":"","notes":"","credits":3},{"course":"INCO 4006","section":"D25","professor":"Mateo Garcés","day":"Monday & Wednesday","time":"2:30-3:50","room":"Online","modality":"Online","program":"","seats":"","notes":"","credits":2},{"course":"INGL 3015","section":"D55","professor":"Mateo Garcés","day":"Monday & Wednesday","time":"5:30-6:50","room":"Online","modality":"Online","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3093","section":"ME5","professor":"Marisol Santiago","day":"Tuesday & Thursday","time":"11:30-12:50","room":"AC-201","modality":"In person","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3093","section":"M10","professor":"Marisol Santiago","day":"Tuesday & Thursday","time":"1:00-2:20","room":"AC-201","modality":"In person","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3094","section":"M25","professor":"Marisol Santiago","day":"Tuesday & Thursday","time":"2:30-3:50","room":"AC-201","modality":"In person","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3104","section":"MB5","professor":"Kevin Kelly","day":"Tuesday & Thursday","time":"8:30-9:50","room":"AC-202","modality":"In person","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3104","section":"ME5","professor":"Kevin Kelly","day":"Tuesday & Thursday","time":"11:30-12:50","room":"AC-202","modality":"In person","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3005","section":"D10","professor":"Mateo Garcés","day":"Tuesday & Thursday","time":"1:00-2:20","room":"Online","modality":"Online","program":"GTEC","seats":"","notes":"","credits":3},{"course":"INGL 3102","section":"D40","professor":"Mateo Garcés","day":"Tuesday & Thursday","time":"4:00-5:20","room":"Online","modality":"Online","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3015","section":"D56","professor":"Mateo Garcés","day":"Tuesday & Thursday","time":"5:30-6:50","room":"Online","modality":"Online","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3102","section":"QB5","professor":"Lizette Rosa","day":"Tuesday & Thursday","time":"8:30-9:50","room":"AC-203","modality":"In person","program":"Nursing","seats":"","notes":"","credits":3},{"course":"INGL 3102","section":"QE6","professor":"Lizette Rosa","day":"Tuesday & Thursday","time":"11:30-12:50","room":"AC-203","modality":"In person","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3102","section":"Q10","professor":"Lizette Rosa","day":"Tuesday & Thursday","time":"1:00-2:20","room":"AC-203","modality":"In person","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3102","section":"HB5","professor":"Yaniré Díaz","day":"Tuesday & Thursday","time":"8:30-9:50","room":"AC-204","modality":"Hybrid","program":"Nursing","seats":"","notes":"","credits":3},{"course":"INGL 3102","section":"HE5","professor":"Yaniré Díaz","day":"Tuesday & Thursday","time":"11:30-12:50","room":"AC-204","modality":"Hybrid","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3102","section":"M10","professor":"Monique Guidicelli","day":"Tuesday & Thursday","time":"1:00-2:20","room":"AC-204","modality":"In person","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3102","section":"Q26","professor":"Monique Guidicelli","day":"Tuesday & Thursday","time":"2:30-3:50","room":"AC-204","modality":"In person","program":"","seats":"","notes":"","credits":3},{"course":"INGL 3061","section":"H40","professor":"Monique Guidicelli","day":"Tuesday & Thursday","time":"4:00-5:20","room":"AC-204","modality":"Hybrid","program":"","seats":"","notes":"","credits":3},{"course":"EDPE 3018","section":"H25","professor":"Yaniré Díaz","day":"Tuesday & Thursday","time":"2:30-3:50","room":"AC-306 (Cap: 22)","modality":"Hybrid","program":"Education","seats":"","notes":"","credits":3},{"course":"INCO 4006","section":"D40","professor":"Jesús Ramírez","day":"Tuesday & Thursday","time":"4:00-5:20","room":"Online","modality":"Online","program":"","seats":"","notes":"","credits":2},{"course":"INCO 4006","section":"DB5","professor":"Jesús Ramírez","day":"Tuesday & Thursday","time":"8:30-9:50","room":"Online","modality":"Online","program":"","seats":"","notes":"","credits":2},{"course":"INGL 3222","section":"D40","professor":"Kevin Kelly","day":"Tuesday & Thursday","time":"4:00-5:20","room":"Online","modality":"Online","program":"","seats":"","notes":"","credits":3}];
 let UNEX_INIT = [];
+let PROF_COLORS = {"Monique Guidicelli":"#E57373","Kevin Kelly":"#FFD54A","Lizette Rosa":"#B39DDB","Jesús Ramírez":"#90A4AE","Mateo Garcés":"#4FC3E8","Marisol Santiago":"#F48FB1","Carlos González":"#A1887F","Geissa Torres":"#92D050","Yaniré Díaz":"#F4A838"};
 /*DATA_END*/
 
 /* ====================== PERSISTENCE (per browser) ====================== */
@@ -363,9 +413,11 @@ function isUnex(c){return c.unex===true || UNEX.has(unexKey(c));}
   if(raw){try{const o=JSON.parse(raw);
     if(o.courses&&o.courses.length){COURSES=o.courses;}
     if(o.term){TERM=o.term;}
+    if(o.colors){PROF_COLORS=Object.assign({},PROF_COLORS,o.colors);}
   }catch(e){}}
 })();
-function persist(){store.set(DATA_KEY,JSON.stringify({courses:COURSES,term:TERM}));}
+function persist(){store.set(DATA_KEY,JSON.stringify({courses:COURSES,term:TERM,colors:PROF_COLORS}));}
+function colorFor(name){return PROF_COLORS[name]||"#d9d2c2";}
 
 /* ====================== EXCEL PARSER (upload other terms) ====================== */
 const COURSE_RE=/(INGL|INCO|EDPE)\s*(\d{4})/i;
@@ -558,9 +610,16 @@ function renderAdminDetail(key){
 }
 
 /* ---- tabs ---- */
+let curTab="tab-overview";
 function switchTab(id){
+  /* capture unsaved editor typing before leaving the editor so other tabs reflect it */
+  if(curTab==="tab-editor" && id!=="tab-editor"){collectEditor();persist();}
+  curTab=id;
   document.querySelectorAll("#adminTabs .tabbtn").forEach(b=>b.classList.toggle("active",b.dataset.tab===id));
-  ["tab-overview","tab-editor","tab-plantilla"].forEach(t=>$(t).classList.toggle("hidden",t!==id));
+  ["tab-overview","tab-grid","tab-editor","tab-plantilla"].forEach(t=>$(t).classList.toggle("hidden",t!==id));
+  if(id==="tab-overview")renderOverview();
+  if(id==="tab-grid")renderGrid();
+  if(id==="tab-editor")renderEditor();
   if(id==="tab-plantilla")renderPlantilla();
 }
 document.querySelectorAll("#adminTabs .tabbtn").forEach(b=>b.addEventListener("click",()=>switchTab(b.dataset.tab)));
@@ -630,19 +689,174 @@ $("edSave").addEventListener("click",()=>{collectEditor();persist();refreshHeade
 $("edRevert").addEventListener("click",()=>{
   if(!confirm("Discard changes in this browser and revert to the published schedule?"))return;
   store.remove(DATA_KEY);location.reload();});
-$("edDownloadHtml").addEventListener("click",downloadUpdatedHTML);
+$("edDownloadHtml").addEventListener("click",()=>downloadUpdatedHTML("edStatus"));
 
 /* ====================== DOWNLOAD UPDATED HTML ====================== */
-function downloadUpdatedHTML(){
-  collectEditor();persist();refreshHeader();renderOverview();
+function downloadUpdatedHTML(statusEl){
+  if(curTab==="tab-editor")collectEditor();
+  persist();refreshHeader();renderOverview();
   let html="<!DOCTYPE html>\n"+document.documentElement.outerHTML;
-  const block="/*DATA_START*/\nlet TERM = "+JSON.stringify(TERM)+";\nlet COURSES = "+JSON.stringify(COURSES)+";\nlet UNEX_INIT = [];\n/*DATA_END*/";
+  const block="/*DATA_START*/\nlet TERM = "+JSON.stringify(TERM)+";\nlet COURSES = "+JSON.stringify(COURSES)+";\nlet UNEX_INIT = [];\nlet PROF_COLORS = "+JSON.stringify(PROF_COLORS)+";\n/*DATA_END*/";
   html=html.replace(/\/\*DATA_START\*\/[\s\S]*?\/\*DATA_END\*\//,()=>block);
   const blob=new Blob([html],{type:"text/html;charset=utf-8"});
   const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="index.html";
   document.body.appendChild(a);a.click();document.body.removeChild(a);
-  $("edStatus").textContent="✓ Downloaded index.html — upload it to GitHub to publish";$("edStatus").style.color="var(--green)";
+  const el=$(statusEl||"edStatus");if(el){el.textContent="✓ Downloaded index.html — upload it to GitHub to publish";el.style.color="var(--green)";}
 }
+
+/* ====================== GRID VIEW ====================== */
+const LW_COLS=[["7:00-8:30",420],["8:30-9:50",510],["10:00-11:30",600],["11:30-12:50",690],["1:00-2:20",780],["2:30-3:50",870],["4:00-5:20",960],["5:30-6:50",1050]];
+const FRI_COLS=[["9:00-11:50",540],["1:00-3:50",780]];
+const MJ_COLS=[["7:00-8:20",420],["8:30-9:50",510],["11:30-12:50",690],["1:00-2:20",780],["2:30-3:50",870],["4:00-5:20",960],["5:30-6:50",1050],["7:00-8:30",1140]];
+const ROOM_ORDER=["AC-201","AC-202","AC-203","AC-204","AC-306","Additional Rooms"];
+function baseRoom(r){r=(r||"").trim();if(!r||/online/i.test(r))return "A distancia";return r.replace(/\s*\(Cap:[^)]*\)/i,"").trim();}
+function courseBand(c){if(c.day==="Friday")return "FRI";if(/^tuesday/i.test(c.day))return "MJ";return "LW";}
+function roomList(){
+  const set=new Set();
+  COURSES.forEach(c=>{if(c.modality!=="Online")set.add(baseRoom(c.room));});
+  const extra=[...set].filter(r=>!ROOM_ORDER.includes(r)).sort();
+  return ROOM_ORDER.filter(r=>set.has(r)).concat(extra).concat(["A distancia"]);
+}
+function colMatch(c,colStart,cols){
+  const s=timeStart(c.time);
+  /* exact-ish: same start minute */
+  if(s===colStart)return true;
+  return false;
+}
+function cellCourses(band,room,colStart){
+  return COURSES.map((c,i)=>({c,i})).filter(o=>{
+    const c=o.c;
+    if(!profVisible(c.professor))return false;
+    const b=courseBand(c);
+    const bandMatch=(band==="LW"&&b==="LW")||(band==="MJ"&&b==="MJ")||(band==="FRI"&&b==="FRI");
+    if(!bandMatch)return false;
+    if(baseRoom(c.room)!==room)return false;
+    return timeStart(c.time)===colStart;
+  });
+}
+function chipHTML(o){
+  const c=o.c;const col=colorFor(c.professor);
+  const mk=c.modality==="Online"?" ·D":(c.modality==="Hybrid"?" ·H":"");
+  const extra=[c.program,c.seats?("cupo "+c.seats):""].filter(Boolean).join(" · ");
+  return '<span class="gchip" data-i="'+o.i+'" style="background:'+col+'">'+
+    '<span class="gc-sec">'+esc(c.section||"—")+'</span> '+esc(c.course)+esc(mk)+
+    (extra?'<span class="gc-x">'+esc(extra)+'</span>':'')+'</span>';
+}
+function bandTable(band,label,cols,withFri){
+  const rooms=roomList();
+  const allCols=cols.concat(withFri?FRI_COLS:[]);
+  let head='<tr><th class="roomhdr">'+label+'</th>';
+  cols.forEach(cc=>head+='<th>'+cc[0]+'</th>');
+  if(withFri)FRI_COLS.forEach(cc=>head+='<th>Fri<br>'+cc[0]+'</th>');
+  head+='</tr>';
+  let body='';
+  rooms.forEach(room=>{
+    body+='<tr><td class="roomcell">'+esc(room)+'</td>';
+    const colDefs=cols.map(cc=>({cc,band,fri:false})).concat(withFri?FRI_COLS.map(cc=>({cc,band:"FRI",fri:true})):[]);
+    colDefs.forEach(cd=>{
+      const list=cellCourses(cd.band,room,cd.cc[1]);
+      let inner=list.map(chipHTML).join("");
+      inner+='<button class="cell-add" data-room="'+esc(room)+'" data-band="'+cd.band+'" data-time="'+esc(cd.cc[0])+'">+</button>';
+      body+='<td class="cell'+(cd.fri?' fri':'')+'">'+inner+'</td>';
+    });
+    body+='</tr>';
+  });
+  return '<div class="band-title">'+label+'</div><div class="gridwrap"><table class="sgrid"><thead>'+head+'</thead><tbody>'+body+'</tbody></table></div>';
+}
+let visibleProfs=null; /* null = show all; otherwise a Set of professor names to show */
+function profVisible(nm){return !visibleProfs || visibleProfs.has(nm);}
+function allProfNames(){return TEACH_KEYS.map(k=>PROFESSORS[k].name);}
+function toggleProf(nm){
+  if(visibleProfs===null)visibleProfs=new Set(allProfNames());
+  if(visibleProfs.has(nm))visibleProfs.delete(nm);else visibleProfs.add(nm);
+  if(visibleProfs.size===allProfNames().length)visibleProfs=null; /* back to "all" */
+  renderLegend();renderGridTablesOnly();
+}
+function renderLegend(){
+  let h='<div class="leg-controls"><span class="lc-label">Show professors:</span>'+
+    '<button class="btn-ghost btn-sm" id="legAll">Show all</button>'+
+    '<button class="btn-ghost btn-sm" id="legNone">Clear</button></div><div class="legend-row">';
+  allProfNames().forEach(nm=>{
+    const on=profVisible(nm);
+    h+='<span class="leg-item'+(on?'':' off')+'" data-prof="'+esc(nm)+'">'+
+       '<input type="color" value="'+colorFor(nm)+'" data-prof="'+esc(nm)+'">'+
+       '<span class="leg-chk">'+(on?'✓':'')+'</span>'+esc(nm)+'</span>';
+  });
+  h+='</div>';
+  $("gridLegend").innerHTML=h;
+  $("gridLegend").querySelectorAll('input[type=color]').forEach(inp=>{
+    inp.addEventListener("click",e=>e.stopPropagation());
+    inp.addEventListener("input",e=>{e.stopPropagation();PROF_COLORS[inp.dataset.prof]=e.target.value;persist();renderGridTablesOnly();});
+  });
+  $("gridLegend").querySelectorAll('.leg-item').forEach(it=>it.addEventListener("click",()=>toggleProf(it.dataset.prof)));
+  $("legAll").addEventListener("click",()=>{visibleProfs=null;renderLegend();renderGridTablesOnly();});
+  $("legNone").addEventListener("click",()=>{visibleProfs=new Set();renderLegend();renderGridTablesOnly();});
+}
+function renderGridTablesOnly(){
+  $("gridBody").innerHTML=
+    bandTable("LW","MON / WED  (+ Friday)",LW_COLS,true)+
+    bandTable("MJ","TUES / THURS",MJ_COLS,false);
+  bindChips();
+}
+function bindChips(){
+  $("gridBody").querySelectorAll(".gchip").forEach(ch=>ch.addEventListener("click",()=>openCourseModal(+ch.dataset.i)));
+  $("gridBody").querySelectorAll(".cell-add").forEach(b=>b.addEventListener("click",()=>{
+    const room=b.dataset.room,band=b.dataset.band,time=b.dataset.time;
+    const day=band==="FRI"?"Friday":(band==="MJ"?"Tuesday & Thursday":"Monday & Wednesday");
+    const roomVal=room==="A distancia"?"Online":room;
+    const mod=room==="A distancia"?"Online":"In person";
+    openCourseModal(null,{course:"INGL ",credits:3,section:"",professor:PROFESSORS[TEACH_KEYS[0]].name,day:day,time:time,room:roomVal,modality:mod,program:"",seats:"",unex:false,notes:""});
+  }));
+}
+function renderGrid(){renderLegend();renderGridTablesOnly();$("gridStatus").textContent="";}
+
+/* shared course modal (used by grid; writes to COURSES) */
+function openCourseModal(idx,preset){
+  const c=idx!=null?COURSES[idx]:(preset||{});
+  const sel=(arr,val)=>arr.map(o=>'<option'+(o===val?' selected':'')+'>'+o+'</option>').join('');
+  const profSel=TEACH_KEYS.map(k=>{const nm=PROFESSORS[k].name;return '<option'+(nameMatches(c.professor||"",nm)?' selected':'')+'>'+nm+'</option>';}).join('');
+  const bg=document.createElement("div");bg.className="modal-bg";
+  bg.innerHTML='<div class="modal"><h3>'+(idx!=null?"Edit course":"Add course")+'</h3>'+
+    '<div class="modal-row"><div><label>Course</label><input id="m_course" type="text" value="'+esc(c.course||"")+'"></div>'+
+    '<div style="flex:0 0 80px"><label>Credits</label><input id="m_cr" type="number" min="0" max="6" value="'+(crOf(c)||3)+'"></div>'+
+    '<div style="flex:0 0 90px"><label>Section</label><input id="m_sec" type="text" value="'+esc(c.section||"")+'"></div></div>'+
+    '<label>Professor</label><select id="m_prof">'+profSel+'</select>'+
+    '<div class="modal-row"><div><label>Day</label><select id="m_day">'+sel(DAY_OPTS,c.day||"Monday & Wednesday")+'</select></div>'+
+    '<div><label>Modality</label><select id="m_mod">'+sel(MOD_OPTS,c.modality||"In person")+'</select></div></div>'+
+    '<div class="modal-row"><div><label>Time</label><input id="m_time" type="text" value="'+esc(c.time||"")+'"></div>'+
+    '<div><label>Room</label><input id="m_room" type="text" value="'+esc(c.room||"")+'"></div></div>'+
+    '<div class="modal-row"><div><label>Program</label><input id="m_prog" type="text" value="'+esc(c.program||"")+'"></div>'+
+    '<div style="flex:0 0 90px"><label>Cupo</label><input id="m_seats" type="text" value="'+esc(c.seats||"")+'"></div></div>'+
+    '<label class="modal-check"><input id="m_unex" type="checkbox"'+(isUnex(c)?' checked':'')+'> Paid through UNEX</label>'+
+    '<div class="modal-actions"><button class="btn-primary" id="m_save">Save</button>'+
+    (idx!=null?'<button class="btn-danger" id="m_del">Delete</button>':'')+
+    '<button class="btn-ghost" id="m_cancel">Cancel</button></div></div>';
+  document.body.appendChild(bg);
+  const close=()=>document.body.removeChild(bg);
+  bg.addEventListener("click",e=>{if(e.target===bg)close();});
+  bg.querySelector("#m_cancel").addEventListener("click",close);
+  const del=bg.querySelector("#m_del");if(del)del.addEventListener("click",()=>{if(confirm("Delete this course?")){COURSES.splice(idx,1);afterGridEdit();close();}});
+  bg.querySelector("#m_save").addEventListener("click",()=>{
+    const obj={
+      course:bg.querySelector("#m_course").value.trim(),
+      credits:parseInt(bg.querySelector("#m_cr").value,10)||3,
+      section:bg.querySelector("#m_sec").value.trim(),
+      professor:bg.querySelector("#m_prof").value,
+      day:bg.querySelector("#m_day").value,
+      modality:bg.querySelector("#m_mod").value,
+      time:bg.querySelector("#m_time").value.trim(),
+      room:bg.querySelector("#m_room").value.trim(),
+      program:bg.querySelector("#m_prog").value.trim(),
+      seats:bg.querySelector("#m_seats").value.trim(),
+      unex:bg.querySelector("#m_unex").checked, notes:""
+    };
+    if(idx!=null)COURSES[idx]=obj;else COURSES.push(obj);
+    afterGridEdit();close();
+  });
+}
+function afterGridEdit(){persist();renderGridTablesOnly();$("gridStatus").textContent="✓ Saved to this browser — use Download updated index.html to publish";$("gridStatus").style.color="var(--green)";}
+$("gridAdd").addEventListener("click",()=>openCourseModal(null));
+$("gridDownloadHtml").addEventListener("click",()=>downloadUpdatedHTML("gridStatus"));
 
 /* ====================== PLANTILLA PROPUESTA ====================== */
 function startEnd(time){const m=(time||"").match(/(\d{1,2}:\d{2})\s*[-–]\s*(\d{1,2}:\d{2})/);return m?[m[1],m[2]]:["",""];}
