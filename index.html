@@ -1,4 +1,4 @@
-https://geissatorres-sudo.github.io/horario-ingles/<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -168,6 +168,15 @@ tbody tr:hover{background:var(--gold-soft)}
 .leg-item{display:flex;align-items:center;gap:7px;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:4px 12px 4px 6px;font-size:.8rem;color:var(--navy);font-weight:600;cursor:pointer;user-select:none;transition:opacity .12s,filter .12s}
 .leg-item.off{opacity:.42;filter:grayscale(.65)}
 .leg-item .leg-chk{font-size:.9em;color:var(--green);width:11px;display:inline-block}
+.course-filter{margin-bottom:16px}
+.cf-row{display:flex;flex-wrap:wrap;gap:7px}
+.cf-item{display:inline-flex;align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:5px 9px;font-size:.78rem;font-weight:600;color:var(--navy);cursor:pointer;user-select:none;transition:opacity .12s,background .12s}
+.cf-item.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.cf-item.off{opacity:.78}
+.cf-count{background:var(--gold);color:var(--navy);border-radius:999px;padding:0 6px;font-size:.72em;font-weight:700;margin-left:6px}
+.cf-item.on .cf-count{background:var(--gold-bright)}
+.cf-summary{font-size:.8rem;color:var(--muted);margin-top:8px}
+.cf-summary b{color:var(--navy)}
 .leg-item input[type=color]{width:22px;height:22px;border:none;border-radius:50%;background:none;cursor:pointer;padding:0}
 .band-title{font-family:'Fraunces',serif;font-weight:600;color:var(--navy);margin:18px 0 8px;font-size:1.05rem}
 .gridwrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin-bottom:8px}
@@ -309,6 +318,7 @@ table.sgrid td.fri{background:#fbf6e6}
         Changes sync automatically with <b>Edit courses</b>. Pick each professor's color in the legend below. Online courses appear in the <b>A distancia</b> row.
       </div>
       <div class="grid-legend" id="gridLegend"></div>
+      <div class="course-filter" id="gridCourseFilter"></div>
       <div id="gridBody"></div>
       <div class="ed-toolbar" style="margin-top:14px">
         <button class="btn-primary btn-sm" id="gridAdd">+ Add course</button>
@@ -727,6 +737,7 @@ function cellCourses(band,room,colStart){
   return COURSES.map((c,i)=>({c,i})).filter(o=>{
     const c=o.c;
     if(!profVisible(c.professor))return false;
+    if(!courseVisible(c.course))return false;
     const b=courseBand(c);
     const bandMatch=(band==="LW"&&b==="LW")||(band==="MJ"&&b==="MJ")||(band==="FRI"&&b==="FRI");
     if(!bandMatch)return false;
@@ -770,7 +781,7 @@ function toggleProf(nm){
   if(visibleProfs===null)visibleProfs=new Set(allProfNames());
   if(visibleProfs.has(nm))visibleProfs.delete(nm);else visibleProfs.add(nm);
   if(visibleProfs.size===allProfNames().length)visibleProfs=null; /* back to "all" */
-  renderLegend();renderGridTablesOnly();
+  renderLegend();renderCourseFilter();renderGridTablesOnly();
 }
 function renderLegend(){
   let h='<div class="leg-controls"><span class="lc-label">Show professors:</span>'+
@@ -789,8 +800,8 @@ function renderLegend(){
     inp.addEventListener("input",e=>{e.stopPropagation();PROF_COLORS[inp.dataset.prof]=e.target.value;persist();renderGridTablesOnly();});
   });
   $("gridLegend").querySelectorAll('.leg-item').forEach(it=>it.addEventListener("click",()=>toggleProf(it.dataset.prof)));
-  $("legAll").addEventListener("click",()=>{visibleProfs=null;renderLegend();renderGridTablesOnly();});
-  $("legNone").addEventListener("click",()=>{visibleProfs=new Set();renderLegend();renderGridTablesOnly();});
+  $("legAll").addEventListener("click",()=>{visibleProfs=null;renderLegend();renderCourseFilter();renderGridTablesOnly();});
+  $("legNone").addEventListener("click",()=>{visibleProfs=new Set();renderLegend();renderCourseFilter();renderGridTablesOnly();});
 }
 function renderGridTablesOnly(){
   $("gridBody").innerHTML=
@@ -808,7 +819,41 @@ function bindChips(){
     openCourseModal(null,{course:"INGL ",credits:3,section:"",professor:PROFESSORS[TEACH_KEYS[0]].name,day:day,time:time,room:roomVal,modality:mod,program:"",seats:"",unex:false,notes:""});
   }));
 }
-function renderGrid(){renderLegend();renderGridTablesOnly();$("gridStatus").textContent="";}
+/* ---- course-code filter ---- */
+let visibleCourses=null; /* null = all; otherwise a Set of course codes to show */
+function courseVisible(code){return !visibleCourses || visibleCourses.has(code);}
+function allCourseCodes(){return [...new Set(COURSES.map(c=>c.course))].sort();}
+function courseCount(code){return COURSES.filter(c=>c.course===code).length;}
+function toggleCourse(code){
+  const codes=allCourseCodes();
+  if(visibleCourses===null)visibleCourses=new Set(codes);
+  if(visibleCourses.has(code))visibleCourses.delete(code);else visibleCourses.add(code);
+  if(visibleCourses.size===codes.length)visibleCourses=null;
+  renderCourseFilter();renderGridTablesOnly();
+}
+function renderCourseFilter(){
+  const codes=allCourseCodes();
+  let h='<div class="leg-controls"><span class="lc-label">Show courses:</span>'+
+    '<button class="btn-ghost btn-sm" id="cfAll">Show all</button>'+
+    '<button class="btn-ghost btn-sm" id="cfNone">Clear</button></div><div class="cf-row">';
+  codes.forEach(code=>{
+    const on=courseVisible(code);
+    h+='<span class="cf-item '+(on?'on':'off')+'" data-code="'+esc(code)+'">'+esc(code)+
+       '<span class="cf-count">'+courseCount(code)+'</span></span>';
+  });
+  h+='</div>';
+  /* summary of what is currently shown (respects both filters) */
+  const shown=COURSES.filter(c=>profVisible(c.professor)&&courseVisible(c.course));
+  const bycode={};shown.forEach(c=>bycode[c.course]=(bycode[c.course]||0)+1);
+  const parts=Object.keys(bycode).sort().map(k=>k+" ("+bycode[k]+")");
+  h+='<div class="cf-summary">Showing <b>'+shown.length+'</b> section'+(shown.length===1?'':'s')+
+     (parts.length&&parts.length<=12?' — '+parts.join(" · "):'')+'</div>';
+  $("gridCourseFilter").innerHTML=h;
+  $("gridCourseFilter").querySelectorAll('.cf-item').forEach(it=>it.addEventListener("click",()=>toggleCourse(it.dataset.code)));
+  $("cfAll").addEventListener("click",()=>{visibleCourses=null;renderCourseFilter();renderGridTablesOnly();});
+  $("cfNone").addEventListener("click",()=>{visibleCourses=new Set();renderCourseFilter();renderGridTablesOnly();});
+}
+function renderGrid(){renderLegend();renderCourseFilter();renderGridTablesOnly();$("gridStatus").textContent="";}
 
 /* shared course modal (used by grid; writes to COURSES) */
 function openCourseModal(idx,preset){
